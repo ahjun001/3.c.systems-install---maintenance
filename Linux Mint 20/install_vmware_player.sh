@@ -3,7 +3,6 @@
 set -x
 
 input_file=https://www.vmware.com/go/getplayer-linux
-input_file=https://github.com/ahjun001/1.4-learning-vim/blob/master/README.adoc
 output_file=/tmp/VMware-Player-Full-xxx.x86_64.bundle
 if wget "$input_file" -o "$output_file"; then
     printf '%s downloaded\n' "$input_file"

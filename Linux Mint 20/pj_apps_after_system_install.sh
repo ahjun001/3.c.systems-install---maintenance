@@ -1,16 +1,17 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC3044
 
 # todo
 # create corresponding test
 # environment for distro  LxMt Kub WLC
 # if shelltest don't provide better view, then loop
 
+# mkdir -p ~/Documents/Github
+# cd ~/Documents/Github
 # download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
 # install VPN
 
 set -x
-
-if ! sudo ./reset\ all\ links.sh; then exit 1; fi
 
 sudo apt update
 
@@ -22,6 +23,24 @@ if ! command -v nvim; then
     if ! ../vim/nvim_pj_install.sh; then exit 1; fi
 fi
 
+# VSCode
+cli_command=code
+# sign-in to install plugins
+if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
+if ! "$cli_command"; then exit 1; fi
+
+# shellSpec
+cli_command=shellspec
+if ! command -v "$cli_command"; then
+    pushd /tmp || exit
+    if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
+    popd || exit
+fi
+if ! shellspec -v; then exit 1; fi
+
+# reset links for vim, nvim, zsh, VSCode, shellSpec
+if ! sudo ./reset\ all\ links.sh; then exit 1; fi
+
 # Firefox
 cli_command=firefox
 if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
@@ -30,12 +49,6 @@ if ! "$cli_command"; then exit 1; fi
 # Chrome
 ,google-chrome_update.sh
 if ! google-chrome; then exit 1; fi
-
-# VSCode
-cli_command=code
-# sign-in to install plugins
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
-if ! "$cli_command"; then exit 1; fi
 
 # anki
 cli_command=anki

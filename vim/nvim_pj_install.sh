@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# shellcheck disable=SC3037
 
 # from https://github.com/ahjun001/3.a.1-linux.git
 
@@ -24,4 +23,4 @@ sudo ln -fs "$store_dir"vimrc /usr/share/sysinit.vim
 if ! nvim; then exit; fi
 
 set +x
-echo -e "\nExiting $0\n"
+printf '\nExiting %s\n' "$0"
