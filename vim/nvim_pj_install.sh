@@ -12,11 +12,12 @@ if [ ! -d "$install_dir" ]; then mkdir "$install_dir"; fi
 
 install_file="$install_dir"nvim.appimage
 if [ ! -f "$install_file" ]; then
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o "$install_file"
+    sudo wget -P "$install_dir" https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
+    # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o "$install_file"
     chmod u+x "$install_file"
 fi
 
-sudo ln -fs "$install_file" /usr/local/bin
+sudo ln -fs "$install_file" /usr/local/bin/nvim
 
 sudo ln -fs "$store_dir"vimrc /usr/share/sysinit.vim
 # ln -fs $store_dir/vimrc ~/.config/nvim/init.vim
