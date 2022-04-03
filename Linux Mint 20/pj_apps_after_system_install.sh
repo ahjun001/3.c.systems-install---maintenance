@@ -23,10 +23,13 @@ if ! command -v nvim; then
     if ! ../vim/nvim_pj_install.sh; then exit 1; fi
 fi
 
+# Firefox
+if ! firefox; then exit 1; fi
+
 # VSCode
-cli_command=code
+firefox https://code.visualstudio.com/Download
+dpkg -i /tmp/code*.deb
 # sign-in to install plugins
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
 if ! "$cli_command"; then exit 1; fi
 
 # shellSpec
@@ -41,10 +44,18 @@ if ! shellspec -v; then exit 1; fi
 # reset links for vim, nvim, zsh, VSCode, shellSpec
 if ! sudo ./reset\ all\ links.sh; then exit 1; fi
 
-# Firefox
-cli_command=firefox
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
-if ! "$cli_command"; then exit 1; fi
+# python
+sudo apt install python3 python3-venv python3-pip
+
+# brave
+pushd /tmp || exit 1
+sudo apt -y install curl software-properties-common apt-transport-https 
+curl https://brave-browser-apt-release.s3.brave.com/brave-core.asc| gpg --dearmor > brave-core.gpg
+sudo install -o root -g root -m 644 brave-core.gpg /etc/apt/trusted.gpg.d/
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser
+popd
 
 # Chrome
 ,google-chrome_update.sh
