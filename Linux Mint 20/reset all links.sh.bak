@@ -25,8 +25,7 @@ fi
 # link to all Github bash scripts whose filename starts with ,
 if ! find /home/perubu/Documents/GitHub/3.c.systems-install-n-maintain/Linux\ Mint\ 20/ \
    -type f -name ',*.sh' \
-   -exec sudo ln \
-   -fs {} /usr/local/sbin/ \;; then
+   -exec sudo ln -fs {} /usr/local/sbin/ \;; then
    exit 1
 fi
 # where the literal {} gets substituted by the filename and the literal \; is needed for find to know that the custom command ends there.
@@ -41,18 +40,16 @@ if ! find /home/perubu/Documents/GitHub/3.a.2-vsCode/config/Code/User/snippets/ 
 fi
 
 # link to VSCode tasks.json
-my_orig='/home/perubu/Documents/GitHub/3.a.2-vsCode/config/Code/User/tasks.json'
-my_link=/home/perubu/.config/Code/User/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+if ! ln -fs '/home/perubu/Documents/GitHub/3.a.2-vsCode/config/Code/User/tasks.json' \
+   '/home/perubu/.config/Code/User/'; then
    exit 1
 fi
 
 # put shellSpec in path
-my_orig='/home/perubu/.local/lib/shellspec/shellspec'
-my_link=/usr/local/sbin/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+if ! ln -fs '/home/perubu/.local/lib/shellspec/shellspec' \
+   '/usr/local/sbin/'; then
    exit 1
 fi
 
+echo 'No error detected, exiting'
 set +x
-echo -e "\nExiting $0\n"

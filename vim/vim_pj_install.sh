@@ -1,14 +1,23 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC3037
 
-# from https://github.com/ahjun001/
+# from https://github.com/ahjun001/3.a.1-linux.git
 
+set -x
+store_dir=~/Documents/GitHub/3.c.systems-install-n-maintain/vim
+
+# install vim
 apt install vim-gtk3
-apt install neovim
 for vim_dir in backup swap undo view; do
     mkdir -p ~/.vim/$vim_dir
 done
+ln -fs $store_dir/vimrc ~/.vim/vimrc
 # pin to Panel, check, & close
 if ! gvim; then exit; fi
-if ! nvim; then exit; fi
+
+# todo
 # vim-tiny?
 # lien editor"
+
+set +x
+printf '\nExiting %s\n' "$0"
