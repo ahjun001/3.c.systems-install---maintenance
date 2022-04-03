@@ -13,14 +13,23 @@
 
 set -x
 
-sudo apt update
+## sudo apt update
 
 # Vim
 if ! command -v vim; then
     if ! ../vim/vim_pj_install.sh; then exit 1; fi
 fi
+## if ! vim; then exit 1; fi
 if ! command -v nvim; then
     if ! ../vim/nvim_pj_install.sh; then exit 1; fi
+fi
+## if ! nvim; then exit 1; fi
+
+# zsh and oh-my-zsh
+if ! command -v zsh; then
+    sudo apt install zsh
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    chsh
 fi
 
 # Firefox
@@ -31,12 +40,12 @@ if ! command -v code; then
     firefox https://code.visualstudio.com/Download
     # sign-in to install plugins
 fi
-# if ! code; then exit 1; fi
+## if ! code; then exit 1; fi
 
 # shellSpec
 cli_command=shellspec
 if ! command -v "$cli_command"; then
-    pushd /tmp || exit
+    pushd /tmp/ || exit
     if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
     popd || exit
 fi

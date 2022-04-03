@@ -3,7 +3,7 @@
 # from https://github.com/ahjun001/3.a.1-linux.git
 
 set -x
-store_dir=~/Documents/GitHub/3.c.systems-install-n-maintain/vim
+store_dir=~/Documents/Github/3.c.systems-install-n-maintain/vim
 
 # install vim
 apt install vim-gtk3
