@@ -1,10 +1,10 @@
 " from https://github.com/ahjun001/3.a.1-linux.git
 
 " in linuxMint
-" store_dir=~/Documents/GitHub/3.c.systems-install-&-maintenance
-" ln -s ~/Documents/GitHub/cheat-sheet_vim/vimrc   ~/.vim/vimrc
-" ln -s ~/Documents/GitHub/cheat-sheet_vim/vimrc " ~/usr/local/share/nvim/sysinit.vim
-" ln -s ~/Documents/GitHub/cheat-sheet_VIM/vimrc " ~/.config/nvim/init.vim
+" store_dir=~/Documents/Github/3.c.systems-install-&-maintenance
+" ln -s ~/Documents/Github/cheat-sheet_vim/vimrc   ~/.vim/vimrc
+" ln -s ~/Documents/Github/cheat-sheet_vim/vimrc " ~/usr/local/share/nvim/sysinit.vim
+" ln -s ~/Documents/Github/cheat-sheet_VIM/vimrc " ~/.config/nvim/init.vim
 " in Windows _vimrc
 
 " Start from Bram Moolenaar's default settings, get the defaults that most users want. --pjp  {{{

@@ -83,7 +83,7 @@ sudo apt install python3 python3-venv python3-pip
 
 # brave
 if ! command -v brave-browser; then
-    old_wd=pwd
+    old_wd=$(pwd)
     cd /tmp || exit 1
     sudo apt -y install curl software-properties-common apt-transport-https
     curl https://brave-browser-apt-release.s3.brave.com/brave-core.asc | gpg --dearmor >brave-core.gpg
