@@ -3,7 +3,8 @@
 set -x
 
 # exiting if not sudo
-if [ "$(id -u)" != "0" ]; then # this script requires root privileges
+if [ "$(id -u)" != "0" ]; then
+   echo 'this script requires root privileges'
    exit 1
 fi
 
@@ -11,14 +12,20 @@ fi
 my_orig='/home/perubu/Documents/Github/3.c.systems-install-n-maintain/vim/vimrc'
 my_link=/home/perubu/.vim/"$(basename $my_orig)"
 # force to recreate possibly existing link and check that it is not broken
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+if ! ln -fs "$my_orig" "$my_link"; then
+   if [ ! -e "${my_link}" ]; then
+      exit 1
+   fi
    exit 1
 fi
 
 # link to Github .zshrc
 my_orig='/home/perubu/Documents/Github/3.a.1-linux/3. zsh/.zshrc'
 my_link=/home/perubu/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+if ! ln -fs "$my_orig" "$my_link"; then
+   if [ ! -e "${my_link}" ]; then
+      exit 1
+   fi
    exit 1
 fi
 

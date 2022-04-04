@@ -15,27 +15,39 @@
 
 # install and run VPN
 
-# create test_post_sys_ins-l_apps.sh as apps are installed
+# create check_n_pin.sh as apps are installed
 # group apps
-# identify system
 # install difficult first and create a backup
 
 set -x
 
 # using mintinstall
-# first use TimeShift to backup system
 
+[ -f ./check_n_pin.sh ] && rm ./check_n_pin.sh
 
+# wine wechat, wenlin, iexplorer
+if ! command -v wine; then
+    timeshift --create --comments "before wine install"
+    if ! ./wine_install.sh; then
+        exit
+    fi
+else
+    echo 'winecfg' >>./check_n_pin.sh
+fi
 
-# Vim
+# vim
 if ! command -v vim; then
     if ! ../vim/vim_pj_install.sh; then exit 1; fi
+else
+    echo 'vim' >>./check_n_pin.sh
 fi
-## if ! vim; then exit 1; fi
+
+# nvim
 if ! command -v nvim; then
     if ! ../vim/nvim_pj_install.sh; then exit 1; fi
+else
+    echo 'vim' >>./check_n_pin.sh
 fi
-## if ! nvim; then exit 1; fi
 
 # zsh and oh-my-zsh
 if ! command -v zsh; then
@@ -44,15 +56,13 @@ if ! command -v zsh; then
     chsh
 fi
 
-# Firefox
-if ! command -v firefox; then exit 1; fi
-
 # VSCode
 if ! command -v code; then
     firefox https://code.visualstudio.com/Download
+else
     # sign-in to install plugins
+    echo 'code' >>./check_n_pin.sh
 fi
-## if ! code; then exit 1; fi
 
 # shellSpec
 cli_command=shellspec
@@ -61,8 +71,9 @@ if ! command -v "$cli_command"; then
     cd /tmp/ || exit
     if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
     cd "$oldwd" || exit
+else
+    echo "shellspec -v" >>./check_n_pin.sh
 fi
-if ! shellspec -v; then exit 1; fi
 
 # reset links for vim, nvim, zsh, VSCode, shellSpec
 if ! sudo ./reset\ all\ links.sh; then exit 1; fi
@@ -71,56 +82,40 @@ if ! sudo ./reset\ all\ links.sh; then exit 1; fi
 sudo apt install python3 python3-venv python3-pip
 
 # brave
-pushd /tmp || exit 1
-sudo apt -y install curl software-properties-common apt-transport-https
-curl https://brave-browser-apt-release.s3.brave.com/brave-core.asc | gpg --dearmor >brave-core.gpg
-sudo install -o root -g root -m 644 brave-core.gpg /etc/apt/trusted.gpg.d/
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt install brave-browser
-popd || exit 1
+if ! command -v brave-browser; then
+    old_wd=pwd
+    cd /tmp || exit 1
+    sudo apt -y install curl software-properties-common apt-transport-https
+    curl https://brave-browser-apt-release.s3.brave.com/brave-core.asc | gpg --dearmor >brave-core.gpg
+    sudo install -o root -g root -m 644 brave-core.gpg /etc/apt/trusted.gpg.d/
+    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt update
+    sudo apt install brave-browser
+    cd "$old_wd" || exit 1
+else
+    echo 'brave-browser' >>./check_n_pin.sh
+fi
 
 # Chrome
-,google-chrome_update.sh
-if ! google-chrome; then exit 1; fi
-
-# anki
-cli_command=anki
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
-if ! "$cli_command"; then exit 1; fi
-
-# thunderbird
-cli_command=thunderbird
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
-if ! "$cli_command"; then exit 1; fi
-
-# system-monitor
-if ! gnome-system-monitor; then exit 1; fi
+if ! command -v google-chrome; then
+    ,google-chrome_update.sh
+else
+    echo 'google-chrome' >>./check_n_pin.sh
+fi
 
 # inkscape
 if ! command -v inkscape; then
     add-apt-repository ppa:inkscape.dev/stable
     sudo apt update
     sudo apt install inkscape
+else
+    echo "inkscape" >>./check_n_pin.sh
 fi
-if ! inkscape; then exit 1; fi
-
-# disk usage analyser
-if ! baobab; then exit 1; fi
-
-# libre-office
-if ! libreoffice --writer; then exit 1; fi
-
-# calculator
-if ! gnome-calculator; then exit 1; fi
 
 # VMWare player
 if ! vmware-player; then
     ./install_vmware_player.sh
 fi
-
-# torrent downloader
-if ! transmission-gtk; then exit 1; fi
 
 # webapp manager
 echo 'add https://cnrtl.fr/definition/'
@@ -131,12 +126,23 @@ echo 'https://web.whatsapp.com/'
 echo 'https://www.youtube.com/'
 webapp-manager
 
-# audacity
-cli_command=audacity
-if ! command -v "$cli_command"; then sudo apt install "$cli_command"; fi
-if ! "$cli_command"; then exit 1; fi
+# anki, audacity
+for cli_command in 'anki' 'audacity'; do
+    if ! command -v "$cli_command"; then
+        sudo apt install "$cli_command"
+    else
+        printf '%s' "$cli_command" >>check_n_pin.sh
+    fi
+done
 
-# screen-shot
-if ! gnome-screenshot --interactive; then exit 1; fi
+printf """
+thunderbird
+transmission-gtk
+baobab
+libreoffice --writer
+gnome-calculator
+gnome-system-monitor
+gnome-screenshot --interactive
+""" >>check_n_pin.sh
 
 set +x
