@@ -8,12 +8,24 @@
 
 # mkdir -p ~/Documents/Github
 # cd ~/Documents/Github
+
 # download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
-# install VPN
+# download from https://github.com/ahjun001/3.a.1-linux
+# download from https://github.com/ahjun001/3.a.2-vscode
+
+# install and run VPN
+
+# create test_post_sys_ins-l_apps.sh as apps are installed
+# group apps
+# identify system
+# install difficult first and create a backup
 
 set -x
 
-## sudo apt update
+# using mintinstall
+# first use TimeShift to backup system
+
+
 
 # Vim
 if ! command -v vim; then
@@ -45,9 +57,10 @@ fi
 # shellSpec
 cli_command=shellspec
 if ! command -v "$cli_command"; then
-    pushd /tmp/ || exit
+    oldwd='pwd'
+    cd /tmp/ || exit
     if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
-    popd || exit
+    cd "$oldwd" || exit
 fi
 if ! shellspec -v; then exit 1; fi
 
@@ -125,12 +138,5 @@ if ! "$cli_command"; then exit 1; fi
 
 # screen-shot
 if ! gnome-screenshot --interactive; then exit 1; fi
-
-# install wine
-sudo dpkg --add-architecture i386
-mintinstall
-
-# install wine programs
-printf '\nInstall Wenlin, WeChat\n'
 
 set +x
