@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # distro can be one of experimental, unstable, testing or ubuntu.
 DISTRO=testing

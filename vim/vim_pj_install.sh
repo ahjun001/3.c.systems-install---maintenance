@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # from https://github.com/ahjun001/3.a.1-linux.git
 

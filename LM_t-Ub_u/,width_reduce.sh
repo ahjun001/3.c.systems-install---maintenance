@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # shellcheck disable=SC1087,SC2046
 cd /home/perubu/.local/share/Anki2/pj/collection.media || exit
 for file in *.jpg *.png *.gif *.jpeg; do
