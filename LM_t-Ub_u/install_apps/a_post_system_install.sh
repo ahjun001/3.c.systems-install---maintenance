@@ -2,8 +2,7 @@
 # shellcheck disable=SC3044
 
 # Set local resources, if resources don't exist script will attempt to download in /media/perubu/data/resources/
-RESOURCES='/media/perubu/data/resources/'
-RESOURCES='/media/perubu/USB STICK/post_install/resources/'
+RESOURCES='/home/perubu/Documents/Local resources TBU/'
 
 # Get resources for reset\ all\ links.sh
 # either for hard disk with only 1 distro    in ~/Documents/Github
