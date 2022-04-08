@@ -25,12 +25,12 @@ RESOURCES='/home/perubu/Documents/Local resources TBU/'
 # group apps
 # install difficult first and create a backup
 
-set -x
+# create a bash script to launch installed apps afterwards, pin to panel, install plugins if needed
+printf "#!/usr/bin/env bash\n\nprintf 'Launch apps that have been previously installed\nPin to panel\nInstall plugins if needed'\n\n" >./check_n_pin.sh
 
 # VSCode
 if ! command -v code; then
-    CODE_DEB="${RESOURCES}"'code*.deb'
-    while ! ls "$CODE_DEB" 1>/dev/null 2>&1; do
+    while ! ls "${RESOURCES}"'code'*'.deb' 1>/dev/null 2>&1; do
         read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'
 
         Save in ${RESOURCES}
@@ -40,10 +40,11 @@ if ! command -v code; then
     done
     sudo apt install "${RESOURCES}"'code*.deb'
 else
-    # sign-in to install plugins
-    echo 'code' >>./check_n_pin.sh
+    printf 'echo "sign-in to install plugins"\ncode' >>./check_n_pin.sh
 fi
 exit
+
+set -x
 
 # using mintinstall
 
