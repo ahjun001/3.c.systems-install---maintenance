@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC3044
 
+# Get ressources for reset\ all\ links.sh
+# download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
+# download from https://github.com/ahjun001/3.a.1-linux
+# download from https://github.com/ahjun001/3.a.2-vscode
+
+# Use local resources / comment out to download fresh ones
+DATA='/media/perubu/data/'
+
 # todo
 # create corresponding test
 # environment for distro  LxMt Kub WLC
@@ -9,10 +17,6 @@
 # mkdir -p ~/Documents/Github
 # cd ~/Documents/Github
 
-# download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
-# download from https://github.com/ahjun001/3.a.1-linux
-# download from https://github.com/ahjun001/3.a.2-vscode
-
 # install and run VPN
 
 # create check_n_pin.sh as apps are installed
@@ -20,6 +24,20 @@
 # install difficult first and create a backup
 
 set -x
+
+# VSCode
+if ! command -v code; then
+    CODE_DEB="${DATA}"'ressources/code*.deb'
+    while [ -f "$CODE_DEB" ]; do
+        read -n -s 1 -p -r "Set firefox about:preferences Downloads to 'Always ask where to save files'\nSave in ${DATA}\nPress any key to continue ..."
+        firefox https://code.visualstudio.com/Download
+    done
+    sudo apt install "${DATA}"'code*.deb'
+else
+    # sign-in to install plugins
+    echo 'code' >>./check_n_pin.sh
+fi
+exit
 
 # using mintinstall
 
@@ -54,14 +72,6 @@ if ! command -v zsh; then
     sudo apt install zsh
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     chsh
-fi
-
-# VSCode
-if ! command -v code; then
-    firefox https://code.visualstudio.com/Download
-else
-    # sign-in to install plugins
-    echo 'code' >>./check_n_pin.sh
 fi
 
 # shellSpec
