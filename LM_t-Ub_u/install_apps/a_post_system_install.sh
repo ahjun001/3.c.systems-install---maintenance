@@ -29,7 +29,7 @@ RESOURCES='/home/perubu/Documents/Local resources TBU/'
 printf "#!/usr/bin/env bash\n\nprintf 'Launch apps that have been previously installed\nPin to panel\nInstall plugins if needed'\n\n" >./check_n_pin.sh
 
 # VSCode
-if ! command -v code; then
+if  command -v code; then
     while ! ls "${RESOURCES}"'code'*'.deb' 1>/dev/null 2>&1; do
         read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'
 
@@ -38,7 +38,7 @@ if ! command -v code; then
         Press any key to continue ..."
         firefox https://code.visualstudio.com/Download
     done
-    sudo apt install "${RESOURCES}"'code*.deb'
+    ls "${RESOURCES}"'code'*'.deb' | xargs -I{} sudo apt install --dry-run {}
 else
     printf 'echo "sign-in to install plugins"\ncode' >>./check_n_pin.sh
 fi
