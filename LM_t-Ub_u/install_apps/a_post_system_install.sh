@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC3044
 
-# Get ressources for reset\ all\ links.sh
+# Set local resources, if resources don't exist script will attempt to download in /media/perubu/data/resources/
+RESOURCES='/media/perubu/data/resources/'
+RESOURCES='/media/perubu/USB STICK/post_install/resources/'
+
+# Get resources for reset\ all\ links.sh
+# either for hard disk with only 1 distro    in ~/Documents/Github
+# or for multi distros                       in DATA  and then create links to ~/Documents/Github
 # download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
 # download from https://github.com/ahjun001/3.a.1-linux
 # download from https://github.com/ahjun001/3.a.2-vscode
 
-# Use local resources / comment out to download fresh ones
-DATA='/media/perubu/data/'
+# install and run VPN
 
 # todo
 # create corresponding test
@@ -17,8 +22,6 @@ DATA='/media/perubu/data/'
 # mkdir -p ~/Documents/Github
 # cd ~/Documents/Github
 
-# install and run VPN
-
 # create check_n_pin.sh as apps are installed
 # group apps
 # install difficult first and create a backup
@@ -27,12 +30,16 @@ set -x
 
 # VSCode
 if ! command -v code; then
-    CODE_DEB="${DATA}"'ressources/code*.deb'
-    while ls "$CODE_DEB" 1>/dev/null 2>&1; do
-        read -n -s 1 -p -r "Set firefox about:preferences Downloads to 'Always ask where to save files'\nSave in ${DATA}\nPress any key to continue ..."
+    CODE_DEB="${RESOURCES}"'code*.deb'
+    while ! ls "$CODE_DEB" 1>/dev/null 2>&1; do
+        read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'
+
+        Save in ${RESOURCES}
+        
+        Press any key to continue ..."
         firefox https://code.visualstudio.com/Download
     done
-    sudo apt install "${DATA}"'code*.deb'
+    sudo apt install "${RESOURCES}"'code*.deb'
 else
     # sign-in to install plugins
     echo 'code' >>./check_n_pin.sh
