@@ -38,7 +38,7 @@ if  ! command -v code; then
         Press any key to continue ..."
         firefox https://code.visualstudio.com/Download
     done
-    find "${RESOURCES}" -maxdepth 1 -name "code*.deb" -print0 | xargs -I{} sudo apt install --dry-run {}
+    find "${RESOURCES}" -maxdepth 1 -name "code*.deb" -print0 | xargs -I{} sudo apt install {}
 else
     printf 'echo "sign-in to install plugins"\ncode' >>./check_n_pin.sh
 fi
