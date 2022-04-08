@@ -28,7 +28,7 @@ set -x
 # VSCode
 if ! command -v code; then
     CODE_DEB="${DATA}"'ressources/code*.deb'
-    while [ -f "$CODE_DEB" ]; do
+    while ls "$CODE_DEB" 1>/dev/null 2>&1; do
         read -n -s 1 -p -r "Set firefox about:preferences Downloads to 'Always ask where to save files'\nSave in ${DATA}\nPress any key to continue ..."
         firefox https://code.visualstudio.com/Download
     done
