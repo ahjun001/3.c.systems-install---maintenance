@@ -30,7 +30,7 @@ if ! ln -fs "$my_orig" "$my_link"; then
 fi
 
 # link to all Github bash scripts whose filename starts with ,
-if ! find /home/perubu/Documents/Github/3.c.systems-install-n-maintain/LM_t-Ub_u
+if ! find /home/perubu/Documents/Github/3.c.systems-install-n-maintain/LM_t-Ub_u \
    -type f -name ',*.sh' \
    -exec sudo ln \
    -fs {} /usr/local/sbin/ \;; then
