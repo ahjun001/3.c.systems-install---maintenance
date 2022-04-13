@@ -1,30 +1,61 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC3044
 
-# Set local resources, if resources don't exist script will attempt to download in /media/perubu/data/resources/
-RESOURCES='/home/perubu/Documents/Local resources TBU/'
+# manually install and run VPN, manually install if not present
+if ! command -v expressvpn; then
+    exit 1
+fi
+while ! expressvpn status | grep Connected; do
+    expressvpn connect smart
+done
+
+# run
+set -x
+
+# set environment
+./set_env.sh
+# check if needed
+# ./list_env.sh
+
+# Set local resources directory, if doesn't exist, script will later attempt to download them in
+RESOURCES="$HOME/Documents/Local resources TBU/"
+[ ! -d "$RESOURCES" ] && mkdir -v "$RESOURCES"
+# for machine with only 1 distro    in ~/Documents/Github
+# or for multi distros              in DATA partition  and then create links to ~/Documents/Github
 
 # Get resources for reset\ all\ links.sh
-# either for hard disk with only 1 distro    in ~/Documents/Github
-# or for multi distros                       in DATA  and then create links to ~/Documents/Github
-# download from https://github.com/ahjun001/3.c.systems-install-n-maintain.git
-# download from https://github.com/ahjun001/3.a.1-linux
-# download from https://github.com/ahjun001/3.a.2-vscode
 
-# install and run VPN
+packageNeeded=git
+if ! command -v "$packageNeeded"; then
+    if [ -x "$(command -v apt)" ]; then
+        sudo apt install "$packageNeeded"
+    elif [ -x "$(command -v dnf)" ]; then
+        sudo dnf install "$packageNeeded"
+    else
+        echo "Package manager not supported"
+        exit 1
+    fi
+fi
 
-# todo
-# create corresponding test
-# environment for distro  LxMt Kub WLC
-# if shelltest don't provide better view, then loop
+# ~/Github relevant resources
+GITHUB_DIR="$HOME/Documents/Github/"
+[ ! -d "$GITHUB_DIR" ] && mkdir -v "$GITHUB_DIR"
 
-# mkdir -p ~/Documents/Github
-# cd ~/Documents/Github
+old_pwd="$(pwd)"
+cd "$GITHUB_DIR" || exit 1
 
-# create check_n_pin.sh as apps are installed
-# group apps
-# install difficult first and create a backup
+for repo in \
+    '3.c.systems-install-n-maintain' \
+    '3.a.1-linux' \
+    '3.a.2-vsCode'; do
+    if [ ! -d "$GITHUB_DIR""$repo" ] || [ ! -e "$GITHUB_DIR""$repo" ]; then
+        rm -rv "$repo"
+        git clone 'https://github.com/ahjun001/'"$repo"
+    fi
+done
+cd "$old_pwd" || exit 1
 
+set +x && exit
 # create a bash script to launch installed apps afterwards, pin to panel, install plugins if needed
 printf "#!/usr/bin/env bash\n\nprintf 'Launch apps that have been previously installed\nPin to panel\nInstall plugins if needed'\n\n" >./check_n_pin.sh
 chmod +x check_n_pin.sh
@@ -44,8 +75,6 @@ else
     printf 'echo "sign-in to install plugins"\ncode' >>./check_n_pin.sh
 fi
 exit
-
-set -x
 
 # using mintinstall
 
@@ -164,3 +193,15 @@ gnome-screenshot --interactive
 """ >>check_n_pin.sh
 
 set +x
+
+# todo
+# create corresponding test
+# environment for distro  LxMt Kub WLC
+# if shelltest don't provide better view, then loop
+
+# mkdir -p ~/Documents/Github
+# cd ~/Documents/Github
+
+# create check_n_pin.sh as apps are installed
+# group apps
+# install difficult first and create a backup

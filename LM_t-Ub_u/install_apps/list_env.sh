@@ -3,5 +3,5 @@
 # shellcheck source=/dev/null
 source ./set_env.sh
 
-echo "$ID"
-echo "$UB_U_CODENAME"
+echo 'ID = '"$ID"
+echo 'UBUNTU_CODENAME = '"$UBUNTU_CODENAME"
