@@ -1,7 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+unset ID UBUNTU_CODENAME
 
 # shellcheck source=/dev/null
-source ./set_env.sh
+. ./set_env.sh
 
 echo 'ID = '"$ID"
 echo 'UBUNTU_CODENAME = '"$UBUNTU_CODENAME"
