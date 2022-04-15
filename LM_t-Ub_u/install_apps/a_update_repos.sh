@@ -60,4 +60,4 @@ for repo in \
 done
 cd "$old_pwd" || exit 1
 
-echo "Exiting $0 ..."
+printf "\n\n\nExiting $0 ...\n"
