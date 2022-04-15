@@ -6,6 +6,3 @@ Install plugins if needed'
 
 echo "sign-in to install plugins"
 code
-vim
-nvim
-shellspec -v
