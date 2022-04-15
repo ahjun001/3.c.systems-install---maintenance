@@ -3,7 +3,8 @@
 unset ID UBUNTU_CODENAME
 
 # shellcheck source=/dev/null
-. ./set_env.sh
+# shellcheck source=/dev/null
+. /etc/os-release
 
-echo 'ID = '"$ID"
+echo "$0 :"'ID = '"$ID"
 echo 'UBUNTU_CODENAME = '"$UBUNTU_CODENAME"

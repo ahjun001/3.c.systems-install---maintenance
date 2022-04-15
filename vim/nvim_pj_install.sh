@@ -8,7 +8,7 @@ store_dir=~/Documents/Github/3.c.systems-install-n-maintain/vim/
 # install neovim, run nvim
 
 install_dir='/opt/nvim/'
-if [ ! -d "$install_dir" ]; then mkdir "$install_dir"; fi
+if [ ! -d "$install_dir" ]; then mkdir -p "$install_dir"; fi
 
 install_file="$install_dir"nvim.appimage
 if [ ! -f "$install_file" ]; then

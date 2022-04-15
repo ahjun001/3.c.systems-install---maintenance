@@ -5,52 +5,49 @@
 if ! command -v expressvpn; then
     exit 1
 fi
-while ! expressvpn status | grep Connected; do
-    expressvpn connect smart
-done
-
-# run
-set -x
+# while ! expressvpn status | grep Connected; do
+#     expressvpn connect smart
+# done
 
 # set environment
-./set_env.sh
-# check if needed
-# ./list_env.sh
+# shellcheck source=/dev/null
+. /etc/os-release
+
+case $ID in
+linuxmint)
+    PKG='.deb'
+    ;;
+fedora)
+    PKG='.rpm'
+    ;;
+*)
+    printf "\nPackage format not identified\n\nExiting ..."
+    exit 1
+    ;;
+esac
 
 # create a bash script to launch installed apps afterwards, pin to panel, install plugins if needed
 printf "#!/usr/bin/env bash\n\nprintf 'Launch apps that have been previously installed\nPin to panel\nInstall plugins if needed'\n\n" >./check_n_pin.sh
 chmod +x check_n_pin.sh
 
+# run
+set -x
+
 # VSCode
 if ! command -v code; then
-    while ! ls "${RESOURCES}"'code'*'.deb' 1>/dev/null 2>&1; do
-        read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'
+    read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'
 
-        Save in ${RESOURCES}
-        
-        Press any key to continue ..."
-        firefox https://code.visualstudio.com/Download
+    Save in ${RESOURCES}
+    
+    Press any key to continue ..."
+    for file in "${RESOURCES}"'code'*"$PKG" ]; do
+        if [ -f "$file" ]; then break; fi
+        exit
     done
+    firefox https://code.visualstudio.com/Download
     find "${RESOURCES}" -maxdepth 1 -name "code*.deb" -print0 | xargs -0 -I{} sudo apt install {}
 else
-    printf 'echo "sign-in to install plugins"\ncode' >>./check_n_pin.sh
-fi
-exit
-
-set +x && exit
-
-# using mintinstall
-
-[ -f ./check_n_pin.sh ] && rm ./check_n_pin.sh
-
-# wine wechat, wenlin, iexplorer
-if ! command -v wine; then
-    timeshift --create --comments "before wine install"
-    if ! ./wine_install.sh; then
-        exit
-    fi
-else
-    echo 'winecfg' >>./check_n_pin.sh
+    printf 'echo "sign-in to install plugins"\ncode\n' >>./check_n_pin.sh
 fi
 
 # vim
@@ -60,11 +57,11 @@ else
     echo 'vim' >>./check_n_pin.sh
 fi
 
-# nvim
+# nvim, required for VSCode neovim plugin to work
 if ! command -v nvim; then
     if ! ../vim/nvim_pj_install.sh; then exit 1; fi
 else
-    echo 'vim' >>./check_n_pin.sh
+    echo 'nvim' >>./check_n_pin.sh
 fi
 
 # zsh and oh-my-zsh
@@ -87,6 +84,22 @@ fi
 
 # reset links for vim, nvim, zsh, VSCode, shellSpec
 if ! sudo ./reset\ all\ links.sh; then exit 1; fi
+
+set +x && exit
+
+# using mintinstall
+
+[ -f ./check_n_pin.sh ] && rm ./check_n_pin.sh
+
+# wine wechat, wenlin, iexplorer
+if ! command -v wine; then
+    timeshift --create --comments "before wine install"
+    if ! ./wine_install.sh; then
+        exit
+    fi
+else
+    echo 'winecfg' >>./check_n_pin.sh
+fi
 
 # python
 sudo apt install python3 python3-venv python3-pip
