@@ -52,14 +52,14 @@ fi
 
 # vim
 if ! command -v vim; then
-    if ! ../vim/vim_pj_install.sh; then exit 1; fi
+    if ! ../../vim/vim_pj_install.sh; then exit 1; fi
 else
     echo 'vim' >>./check_n_pin.sh
 fi
 
 # nvim, required for VSCode neovim plugin to work
 if ! command -v nvim; then
-    if ! ../vim/nvim_pj_install.sh; then exit 1; fi
+    if ! ../../vim/nvim_pj_install.sh; then exit 1; fi
 else
     echo 'nvim' >>./check_n_pin.sh
 fi
