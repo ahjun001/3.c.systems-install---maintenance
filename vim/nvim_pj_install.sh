@@ -8,13 +8,16 @@ store_dir=~/Documents/Github/3.c.systems-install-n-maintain/vim/
 # install neovim, run nvim
 
 install_dir='/opt/nvim/'
-if [ ! -d "$install_dir" ]; then mkdir -p "$install_dir"; fi
+if [ ! -d "$install_dir" ]; then
+    mkdir -p "$install_dir"
+    sudo chown perubu:perubu "$install_dir"
+fi
 
 install_file="$install_dir"nvim.appimage
 if [ ! -f "$install_file" ]; then
-    sudo wget -P "$install_dir" https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
+    sudo wget -P "$install_dir" https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o "$install_file"
-    chmod u+x "$install_file"
+    chmod u+x "$install_file" || exit 1
 fi
 
 sudo ln -fs "$install_file" /usr/local/bin/nvim

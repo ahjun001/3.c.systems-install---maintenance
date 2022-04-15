@@ -75,7 +75,7 @@ fi
 cli_command=shellspec
 if ! command -v "$cli_command"; then
     oldwd='pwd'
-    cd /tmp/ || exit
+cd "$RESOURCES" || exit
     if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
     cd "$oldwd" || exit
 else
