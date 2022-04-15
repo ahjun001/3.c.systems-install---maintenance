@@ -69,6 +69,7 @@ fi
 # zsh and oh-my-zsh
 if ! command -v zsh; then
     sudo "$PKG_MGR" install zsh
+    git clone https://github.com/jeffreytse/zsh-vi-mode i/plugins/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     chsh
 fi
