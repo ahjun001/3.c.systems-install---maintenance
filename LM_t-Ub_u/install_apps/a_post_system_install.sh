@@ -15,10 +15,12 @@ fi
 
 case $ID in
 linuxmint)
-    PKG='.deb'
+    PKG_FMT='.deb'
+    PKG_MGR='apt'
     ;;
 fedora)
-    PKG='.rpm'
+    PKG_FMT='.rpm'
+    PKG_MGR='dnf'
     ;;
 *)
     printf "\nPackage format not identified\n\nExiting ..."
@@ -40,12 +42,12 @@ if ! command -v code; then
     Save in ${RESOURCES}
     
     Press any key to continue ..."
-    for file in "${RESOURCES}"'code'*"$PKG" ]; do
+    for file in "${RESOURCES}"'code'*"$PKG_FMT" ]; do
         if [ -f "$file" ]; then break; fi
         exit
     done
     firefox https://code.visualstudio.com/Download
-    find "${RESOURCES}" -maxdepth 1 -name "code*.deb" -print0 | xargs -0 -I{} sudo apt install {}
+    find "${RESOURCES}" -maxdepth 1 -name "code*.deb" -print0 | xargs -0 -I{} sudo "$PKG_MGR" install {}
 else
     printf 'echo "sign-in to install plugins"\ncode\n' >>./check_n_pin.sh
 fi
@@ -66,7 +68,8 @@ fi
 
 # zsh and oh-my-zsh
 if ! command -v zsh; then
-    sudo apt install zsh
+    sudo "$PKG_MGR" install zsh
+    git clone https://github.com/jeffreytse/zsh-vi-mode i/plugins/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     chsh
 fi
@@ -75,7 +78,7 @@ fi
 cli_command=shellspec
 if ! command -v "$cli_command"; then
     oldwd='pwd'
-cd "$RESOURCES" || exit
+    cd "$RESOURCES" || exit
     if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
     cd "$oldwd" || exit
 else
@@ -83,7 +86,7 @@ else
 fi
 
 # reset links for vim, nvim, zsh, VSCode, shellSpec
-if ! sudo ./reset\ all\ links.sh; then exit 1; fi
+if ! sudo ../reset\ all\ links.sh; then exit 1; fi
 
 set +x && exit
 
@@ -102,7 +105,7 @@ else
 fi
 
 # python
-sudo apt install python3 python3-venv python3-pip
+sudo "$PKG_MGR" install python3 python3-venv python3-pip
 
 # brave
 if ! command -v brave-browser; then
@@ -112,8 +115,8 @@ if ! command -v brave-browser; then
     curl https://brave-browser-apt-release.s3.brave.com/brave-core.asc | gpg --dearmor >brave-core.gpg
     sudo install -o root -g root -m 644 brave-core.gpg /etc/apt/trusted.gpg.d/
     echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    sudo apt update
-    sudo apt install brave-browser
+    sudo "$PKG_MGR" update
+    sudo "$PKG_MGR" install brave-browser
     cd "$old_wd" || exit 1
 else
     echo 'brave-browser' >>./check_n_pin.sh
@@ -128,9 +131,9 @@ fi
 
 # inkscape
 if ! command -v inkscape; then
-    add-apt-repository ppa:inkscape.dev/stable
-    sudo apt update
-    sudo apt install inkscape
+    add-"$PKG_MGR"-repository ppa:inkscape.dev/stable
+    sudo "$PKG_MGR" update
+    sudo "$PKG_MGR" install inkscape
 else
     echo "inkscape" >>./check_n_pin.sh
 fi
@@ -152,7 +155,7 @@ webapp-manager
 # anki, audacity
 for cli_command in 'anki' 'audacity'; do
     if ! command -v "$cli_command"; then
-        sudo apt install "$cli_command"
+        sudo "$PKG_MGR" install "$cli_command"
     else
         printf '%s' "$cli_command" >>check_n_pin.sh
     fi
