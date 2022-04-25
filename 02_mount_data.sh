@@ -36,7 +36,7 @@ ubuntu)
     ;;
 linuxmint)
     echo "$0 not implemented in $ID"
-    exit 1
+    # exit 1
     ;;
 esac
 

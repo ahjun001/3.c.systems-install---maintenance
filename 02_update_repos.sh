@@ -7,7 +7,7 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for debut purposes
-set -eu
+set -eux
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
@@ -17,7 +17,8 @@ if [ -z ${ID+x} ]; then . /etc/os-release; fi
 if [ -z ${SOURCE_DIR+x} ]; then
     # SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
     # SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
-    SOURCE_DIR='/media/perubu/USB STICK/3.c-install-n-utils/'
+    # SOURCE_DIR='/media/perubu/USB STICK/3.c-install-n-utils/'
+    SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 fi
 
 # ~/Github relevant resources
@@ -30,7 +31,6 @@ fedora | ubuntu)
     ;;
 linuxmint)
     GITHUB_DIR="$HOME/Documents/Github/"
-    exit 1
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
@@ -43,11 +43,11 @@ old_pwd="$(pwd)"
 cd "$GITHUB_DIR" || exit 1
 
 repos=(
-    '3.c.systems-install-n-utils'
-    '3.a.1-linux'
+    '3.c-install-n-utils'
     '3.a.2-vsCode'
+    '3.a.1-linux'
 )
-for repo in ${repos[0]}; do
+for repo in "${repos[@]}"; do
     if [ ! -d "$repo" ] || [ ! -e "$repo" ]; then
         rm -rv "$repo"
         ! git clone 'https://github.com/ahjun001/'"$repo" && exit 1
@@ -61,12 +61,14 @@ done
 cd "$old_pwd" || exit 1
 
 # for ThinkBook, make links from Fedora or Kubuntu partition to data
-for repo in ${repos[0]}; do
-    my_orig="$GITHUB_DIR"repo
-    my_link="$PART_DIR"repo
-    if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
-        exit 1
-    fi
-done
+if [ "$ID" == 'ubuntu' ] || [ "$ID" == 'fedora' ]; then
+    for repo in ${repos[0]}; do
+        my_orig="$GITHUB_DIR"repo
+        my_link="$PART_DIR"repo
+        if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+            exit 1
+        fi
+    done
+fi
 
 echo " $0 : Exiting ..."

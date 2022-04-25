@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=
 
-# 02_speed_up_dnf_apt.sh
+# 02_speed_up_dnf_n_apt.sh
 # speed up Linux Package Manager
 
 # -e to exit on error
@@ -25,7 +25,12 @@ fedora)
     ;;
 linuxmint | ubuntu)
     echo "$0 not implemented in $ID"
+    # exit 1
+    ;;
+*)
+    echo "Distribution $ID not recognized, exiting ..."
     exit 1
     ;;
-
 esac
+
+echo " $0 : Exiting ..."
