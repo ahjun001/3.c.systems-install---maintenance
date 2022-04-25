@@ -9,7 +9,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # link to Github vimrc
-my_orig='/home/perubu/Documents/Github/3.c.install-n-utils/02_vim/vimrc'
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_vim/vimrc'
 my_link=/home/perubu/.vim/"$(basename $my_orig)"
 # force to recreate possibly existing link and check that it is not broken
 if ! ln -fs "$my_orig" "$my_link"; then
@@ -20,7 +20,7 @@ if ! ln -fs "$my_orig" "$my_link"; then
 fi
 
 # link to Github .zshrc
-my_orig='/home/perubu/Documents/Github/3.c.install-n-utils/02_zsh/.zshrc'
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_zsh/.zshrc'
 my_link=/home/perubu/"$(basename "$my_orig")"
 if ! ln -fs "$my_orig" "$my_link"; then
    if [ ! -e "${my_link}" ]; then
