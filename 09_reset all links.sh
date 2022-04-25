@@ -9,7 +9,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # link to Github vimrc
-my_orig='/home/perubu/Documents/Github/3.c.systems-install-n-maintain/vim/vimrc'
+my_orig='/home/perubu/Documents/Github/3.c.systems-install-n-maintain/02_vim/vimrc'
 my_link=/home/perubu/.vim/"$(basename $my_orig)"
 # force to recreate possibly existing link and check that it is not broken
 if ! ln -fs "$my_orig" "$my_link"; then
@@ -20,7 +20,7 @@ if ! ln -fs "$my_orig" "$my_link"; then
 fi
 
 # link to Github .zshrc
-my_orig='/home/perubu/Documents/Github/3.a.1-linux/3. zsh/.zshrc'
+my_orig='/home/perubu/Documents/Github/3.c.systems-install-n-maintain/02_zsh/.zshrc'
 my_link=/home/perubu/"$(basename "$my_orig")"
 if ! ln -fs "$my_orig" "$my_link"; then
    if [ ! -e "${my_link}" ]; then
@@ -30,16 +30,17 @@ if ! ln -fs "$my_orig" "$my_link"; then
 fi
 
 # link to all Github bash scripts whose filename starts with ,
-if ! find /home/perubu/Documents/Github/3.c.systems-install-n-maintain/LM_t-Ub_u \
+if ! find /home/perubu/Documents/Github/3.c.systems-install-n-maintain/ \
    -type f -name ',*.sh' \
    -exec sudo ln \
    -fs {} /usr/local/sbin/ \;; then
    exit 1
 fi
-# where the literal {} gets substituted by the filename and the literal \; is needed for find to know that the custom command ends there.
+# where the literal {} gets substituted by the filename and
+# the literal \; is needed for find to know that the custom command ends there.
 
 # link to VSCode snippets
-if ! find /home/perubu/Documents/Github/3.a.2-vsCode/config/Code/User/snippets/ \
+if ! find /home/perubu/Documents/Github/3.c-install-n-utils/02_code/User/snippets/ \
    -type f \
    -name '*.json' \
    -exec sudo ln \
@@ -48,7 +49,7 @@ if ! find /home/perubu/Documents/Github/3.a.2-vsCode/config/Code/User/snippets/ 
 fi
 
 # link to VSCode tasks.json
-my_orig='/home/perubu/Documents/Github/3.a.2-vsCode/config/Code/User/tasks.json'
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_code/User/tasks.json'
 my_link=/home/perubu/.config/Code/User/"$(basename "$my_orig")"
 if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
    exit 1

@@ -14,7 +14,7 @@ fi
 . /etc/os-release
 
 case $ID in
-linuxmint)
+linuxmint | ubuntu)
     PKG_FMT='.deb'
     PKG_MGR='apt'
     ;;
