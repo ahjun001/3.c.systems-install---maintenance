@@ -17,7 +17,7 @@ if [ -z ${ID+x} ]; then . /etc/os-release; fi
 if [ -z ${SOURCE_DIR+x} ]; then
     # SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
     # SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
-    # SOURCE_DIR='/media/perubu/USB STICK/3.c-install-n-utils/'
+    SOURCE_DIR='/media/perubu/data_ntfs/3.c-install-n-utils/'
     # SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 fi
 
