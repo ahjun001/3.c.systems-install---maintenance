@@ -16,12 +16,12 @@ if [ -z ${ID+x} ]; then . /etc/os-release; fi
 # set scripts & resources directory
 if [ -z ${SOURCE_DIR+x} ]; then
     # SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
-    # SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
+    # SOURCE_DIR='/media/perubu/data/Local resources TBU/'
     SOURCE_DIR='/media/perubu/data_ntfs/3.c-install-n-utils/'
     # SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 fi
 
-# make directories that will contain repositories files (not links to files) 
+# make directories that will contain repositories files (not links to files)
 case $ID in
 fedora | ubuntu)
     REPOS_DIR='/run/media/perubu/data/'
@@ -51,7 +51,7 @@ repos=(
 )
 for repo in "${repos[@]}"; do
     if [ ! -d "$repo" ] || [ ! -e "$repo" ]; then
-        rm -rv "$repo"
+        rm -rfv "$repo"
         ! git clone 'https://github.com/ahjun001/'"$repo" && exit 1
     else
         cd "$repo" || exit 1

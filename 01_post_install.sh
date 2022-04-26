@@ -12,9 +12,9 @@ OPEN_APP=true
 set -eux
 
 # scripts & resources directory
-# export SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
-# export SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
-export SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
+export SOURCE_DIR='/media/perubu/data_ntfs/3.c-install-n-utils/'
+# export SOURCE_DIR='/run/media/perubu/data_ntfs/3.c-install-n-utils/'
+# export SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 
 # export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null
@@ -54,6 +54,6 @@ export SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 ./02_update_repos.sh
 
 # reset all links
-sudo ./09_reset_all_links.sh
+sudo ./03_reset_all_links.sh
 
 echo "Exiting $0 ..."
