@@ -12,9 +12,7 @@ OPEN_APP=true
 set -eux
 
 # scripts & resources directory
-export SOURCE_DIR='/media/perubu/data_ntfs/3.c-install-n-utils/'
-# export SOURCE_DIR='/run/media/perubu/data_ntfs/3.c-install-n-utils/'
-# export SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
+if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"; fi
 
 # export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null

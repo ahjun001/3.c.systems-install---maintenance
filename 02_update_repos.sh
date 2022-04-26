@@ -14,12 +14,7 @@ set -eux
 if [ -z ${ID+x} ]; then . /etc/os-release; fi
 
 # set scripts & resources directory
-if [ -z ${SOURCE_DIR+x} ]; then
-    # SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
-    # SOURCE_DIR='/media/perubu/data/Local resources TBU/'
-    SOURCE_DIR='/media/perubu/data_ntfs/3.c-install-n-utils/'
-    # SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
-fi
+if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"; fi
 
 # make directories that will contain repositories files (not links to files)
 case $ID in

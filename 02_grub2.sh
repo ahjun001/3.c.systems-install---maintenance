@@ -14,21 +14,7 @@ set -eu
 if [ -z ${ID+x} ]; then . /etc/os-release; fi
 
 # scripts & resources directory
-if [ -z ${SOURCE_DIR+x} ]; then
-    case $ID in
-    fedora)
-        # SOURCE_DIR='/run/media/perubu/data/3.c-install-n-utils/'
-        SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
-        ;;
-    linuxmint | ubuntu)
-        SOURCE_DIR='/media/perubu/USB STICK/3.c-install-n-utils/'
-        ;;
-    *)
-        echo "Distribution $ID not recognized, exiting ..."
-        exit 1
-        ;;
-    esac
-fi
+if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"; fi
 
 G_MODIFIED=False
 G_FILE=/etc/default/grub
