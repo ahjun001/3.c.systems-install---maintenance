@@ -62,5 +62,5 @@ if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
    exit 1
 fi
 
-set +x
+
 echo -e "\nExiting $0\n"

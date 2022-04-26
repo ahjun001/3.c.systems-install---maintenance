@@ -7,7 +7,7 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for debut purposes
-set -eux
+set -eu
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
@@ -36,14 +36,14 @@ esac
 
 [ ! -d "$REPOS_DIR" ] && mkdir -v "$REPOS_DIR"
 
-old_pwd="$(pwd)"
-cd "$REPOS_DIR" || exit 1
-
 repos=(
     '3.c-install-n-utils'
     '3.a.2-vsCode'
     '3.a.1-linux'
 )
+
+old_pwd="$(pwd)"
+cd "$REPOS_DIR" || exit 1
 for repo in "${repos[@]}"; do
     if [ ! -d "$repo" ] || [ ! -e "$repo" ]; then
         rm -rfv "$repo"
@@ -54,16 +54,20 @@ for repo in "${repos[@]}"; do
         ! git pull 'https://github.com/ahjun001/'"$repo" && exit 1
         cd ..
     fi
+    echo
 done
 cd "$old_pwd" || exit 1
 
-# for ThinkBook, make links from Fedora or Kubuntu partition to data
+# for ThinkBook, make links from Fedora or Kubuntup to data partition
 if [ "$ID" == 'ubuntu' ] || [ "$ID" == 'fedora' ]; then
-    for repo in ${repos[0]}; do
-        my_orig="$REPOS_DIR"repo
-        my_link="$LINK_DIR"repo
-        if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
-            exit 1
+    for repo in "${repos[@]}"; do
+        my_orig="$REPOS_DIR"$repo
+        my_link="$LINK_DIR"$repo
+        if ! ln -fs "$my_orig" "$my_link"; then
+            if [ ! -e "${my_link}" ]; then
+                echo "$my_link exists but appears roken"
+                exit 1
+            fi
         fi
     done
 fi

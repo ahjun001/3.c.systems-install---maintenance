@@ -9,7 +9,7 @@ OPEN_APP=true
 # -e to exit on error
 # -u to exit on unset variables
 # optionnally -x to echo commands
-set -eux
+set -eu
 
 # scripts & resources directory
 if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
@@ -44,6 +44,8 @@ if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
 
 # install zsh & oh-my-zsh
 ./02_zsh/02_zsh.sh
+
+# install shellspec
 
 # mount data partition
 ./02_mount_data.sh
