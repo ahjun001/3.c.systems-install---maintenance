@@ -14,7 +14,7 @@ set -eu
 if [ -z ${ID+x} ]; then . /etc/os-release; fi
 
 # scripts & resources directory
-if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"; fi
+if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
 
 # install neovim, run nvim
 

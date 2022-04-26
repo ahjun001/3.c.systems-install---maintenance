@@ -12,7 +12,7 @@ OPEN_APP=true
 set -eux
 
 # scripts & resources directory
-if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"; fi
+if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
 
 # export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null
