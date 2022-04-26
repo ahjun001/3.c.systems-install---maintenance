@@ -13,34 +13,35 @@ set -eux
 # shellcheck source=/dev/null
 if [ -z ${ID+x} ]; then . /etc/os-release; fi
 
-# scripts & resources directory
+# set scripts & resources directory
 if [ -z ${SOURCE_DIR+x} ]; then
     # SOURCE_DIR='/run/media/perubu/data/Local resources TBU/'
     # SOURCE_DIR='/run/media/perubu/USB STICK/3.c-install-n-utils/'
     # SOURCE_DIR='/media/perubu/USB STICK/3.c-install-n-utils/'
-    SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
+    # SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 fi
 
-# ~/Github relevant resources
+# make directories that will contain repositories files (not links to files) 
 case $ID in
 fedora | ubuntu)
-    GITHUB_DIR='/run/media/perubu/data/'
-    PART_DIR="$HOME/Documents/Github/"
-    [ ! -d "$PART_DIR" ] && mkdir -v "$PART_DIR"
+    REPOS_DIR='/run/media/perubu/data/'
+    LINK_DIR="$HOME/Documents/Github/"
+    [ ! -d "$LINK_DIR" ] && mkdir -v "$LINK_DIR"
 
     ;;
 linuxmint)
-    GITHUB_DIR="$HOME/Documents/Github/"
+    REPOS_DIR="$HOME/Documents/Github/"
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
     exit 1
     ;;
 esac
-[ ! -d "$GITHUB_DIR" ] && mkdir -v "$GITHUB_DIR"
+
+[ ! -d "$REPOS_DIR" ] && mkdir -v "$REPOS_DIR"
 
 old_pwd="$(pwd)"
-cd "$GITHUB_DIR" || exit 1
+cd "$REPOS_DIR" || exit 1
 
 repos=(
     '3.c-install-n-utils'
@@ -63,8 +64,8 @@ cd "$old_pwd" || exit 1
 # for ThinkBook, make links from Fedora or Kubuntu partition to data
 if [ "$ID" == 'ubuntu' ] || [ "$ID" == 'fedora' ]; then
     for repo in ${repos[0]}; do
-        my_orig="$GITHUB_DIR"repo
-        my_link="$PART_DIR"repo
+        my_orig="$REPOS_DIR"repo
+        my_link="$LINK_DIR"repo
         if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
             exit 1
         fi
