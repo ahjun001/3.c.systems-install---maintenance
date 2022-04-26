@@ -30,7 +30,8 @@ fedora | ubuntu)
 
     ;;
 linuxmint)
-    REPOS_DIR="$HOME/Documents/Github/"
+    # REPOS_DIR="$HOME/Documents/Github/"
+    REPOS_DIR="/media/perubu/data_ntfs/"
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
