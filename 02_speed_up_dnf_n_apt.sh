@@ -21,7 +21,7 @@ fedora)
         echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
         echo 'deltarpm=true' | sudo tee -a /etc/dnf/dnf.conf
     fi
-    less /etc/dnf/dnf.con
+    less /etc/dnf/dnf.conf
     ;;
 linuxmint | ubuntu)
     echo "$0 not implemented in $ID"

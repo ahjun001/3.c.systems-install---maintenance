@@ -56,4 +56,4 @@ export SOURCE_DIR="$HOME/Documents/Github/3.c-install-n-utils/"
 # reset all links
 sudo ./09_reset_all_links.sh
 
-printf '\n\nExiting %s ...\n' "$0"
+echo "Exiting $0 ..."
