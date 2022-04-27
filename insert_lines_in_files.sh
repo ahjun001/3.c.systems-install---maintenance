@@ -13,7 +13,7 @@ set -eu
 # # run with arg u  to undo
 
 # # display results or not
-# \[ -z ${PJ_DISPLAY+x} \] && PJ_DISPLAY=true
+# \[ -z ${MY_DISPLAY+x} \] && MY_DISPLAY=true
 # ' tmp.txt
 
 files=(
@@ -31,10 +31,10 @@ lines=(
     '# run with arg u  to undo'
     ''
     '# display results or not'
-    '[ -z ${PJ_DISPLAY+x} ] && PJ_DISPLAY=true'
+    '[ -z ${MY_DISPLAY+x} ] && MY_DISPLAY=true'
 )
 
-# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -z ${PJ_DISPLAY+x} \] && PJ_DISPLAY=true'
+# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -z ${MY_DISPLAY+x} \] && MY_DISPLAY=true'
 for line in "${lines[@]}"; do
     MY_STRING+="\n$line"
 done

@@ -5,15 +5,18 @@
 OPEN_APP=true
 
 # run silently
- export PJ_DISPLAY=false
+ export MY_DISPLAY=false
 
 # -e to exit on error
 # -u to exit on unset variables
 # optionnally -x to echo commands
-set -eu
+MY_SET=eu
+export MY_SET
+set -${MY_SET}
 
 # scripts & resources directory
-[ -z ${SOURCE_DIR+x} ] && SOURCE_DIR="$(pwd)"/
+SOURCE_DIR="$(pwd)"/
+export SOURCE_DIR
 
 # export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null

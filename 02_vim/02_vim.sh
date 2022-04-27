@@ -8,7 +8,7 @@
 # run with arg u  to undo
 
 # display results or not
-[ -z ${PJ_DISPLAY+x} ] && PJ_DISPLAY=true
+[ -z ${MY_DISPLAY+x} ] && MY_DISPLAY=true
 
 # -e to exit on error
 # -u to exit on unset variables

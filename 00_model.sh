@@ -6,12 +6,13 @@
 # run with arg u  to undo
 
 # display results or not
-[ -z ${PJ_DISPLAY+x} ] && PJ_DISPLAY=true
+[ -z ${MY_DISPLAY+x} ] && MY_DISPLAY=true
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-set -eu
+[ -z ${MY_SET+x} ] && MY_SET=eux
+set -"$MY_SET"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
