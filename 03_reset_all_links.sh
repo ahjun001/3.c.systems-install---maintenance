@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
+# shellcheck disable=
 
+# 03_reset_all_links.sh
+# set links so that apps are seen in $PATH or ,shorcuts; also link repos from partition with data partition
+
+# run with arg u  to undo
+
+# display results or not
+[ -z ${PJ_DISPLAY+x} ] && PJ_DISPLAY=true
+
+# -e to exit on error
+# -u to exit on unset variables
+# -x to echo commands for degub purposes
 set -x
 
 # exiting if not sudo

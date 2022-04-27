@@ -6,12 +6,12 @@
 
 # -e to exit on error
 # -u to exit on unset variables
-# -x to echo commands for debut purposes
-set -eux
+# -x to echo commands for degub purposes
+set -eu
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-if [ -z ${ID+x} ]; then . /etc/os-release; fi
+[ -z ${ID+x} ] && . /etc/os-release
 
 case $ID in
 fedora)
@@ -30,7 +30,7 @@ esac
 if ! command -v zsh; then
 
     # scripts & resources directory
-    if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
+    [ -z ${SOURCE_DIR+x} ] && SOURCE_DIR="$(pwd)"/
 
     # link to Github .zshrc
     my_orig="$SOURCE_DIR/02_zsh/.zshrc"

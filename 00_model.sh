@@ -3,18 +3,22 @@
 
 # 00_model.sh
 # repeat description of what the script should do
+# run with arg u  to undo
+
+# display results or not
+[ -z ${PJ_DISPLAY+x} ] && PJ_DISPLAY=true
 
 # -e to exit on error
 # -u to exit on unset variables
-# -x to echo commands for debut purposes
+# -x to echo commands for degub purposes
 set -eu
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-if [ -z ${ID+x} ]; then . /etc/os-release; fi
+[ -z ${ID+x} ] && . /etc/os-release
 
 # scripts & resources directory
-if [ -z ${SOURCE_DIR+x} ]; then SOURCE_DIR="$(pwd)"/; fi
+[ -z ${SOURCE_DIR+x} ] && SOURCE_DIR="$(pwd)"/
 
 case $ID in
 fedora)
