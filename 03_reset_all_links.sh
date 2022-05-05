@@ -6,14 +6,18 @@
 
 # run with arg u  to undo
 
-# display results or not
-[ -n "${MY_DISPLAY+x}"  ] && MY_DISPLAY=true
+# launch after install
+[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+
+# info verbose debug trace
+[[ $MY_TRACE ]] || MY_TRACE=true
+
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[ -n "${MY_SET+x}" ] && MY_SET=eux
-set -"$MY_SET"
+[[ ${MY_ENV} ]] || MY_ENV=eux
+set -"$MY_ENV"
 
 # exiting if not sudo
 if [ "$(id -u)" != "0" ]; then

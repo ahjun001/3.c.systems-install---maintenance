@@ -7,14 +7,18 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[ -n "${MY_SET+x}" ] && MY_SET=eux
-set -"$MY_SET"
+[[ ${MY_ENV} ]] || MY_ENV=eux
+set -"$MY_ENV"
 
 # sed -i '6i\
 # # run with arg u  to undo
 
-# # display results or not
-# \[ -n "${MY_DISPLAY+x}"  \] && MY_DISPLAY=true
+# # launch after install
+[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+
+# info verbose debug trace
+[[ $MY_TRACE ]] || MY_TRACE=true
+# \[ -n "${LAUNCH_APP+x}"  \] && LAUNCH_APP=true
 # ' tmp.txt
 
 files=(
@@ -31,11 +35,15 @@ files=(
 lines=(
     '# run with arg u  to undo'
     ''
-    '# display results or not'
-    '[ -n "${MY_DISPLAY+x}"  ] && MY_DISPLAY=true'
+    '# launch after install
+[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+
+# info verbose debug trace
+[[ $MY_TRACE ]] || MY_TRACE=true'
+    ''
 )
 
-# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -n "${MY_DISPLAY+x}"  \] && MY_DISPLAY=true'
+# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -n "${LAUNCH_APP+x}"  \] && LAUNCH_APP=true'
 for line in "${lines[@]}"; do
     MY_STRING+="\n$line"
 done

@@ -5,15 +5,15 @@
 OPEN_APP=true
 
 # run silently
- MY_DISPLAY=false
- export MY_DISPLAY
+ LAUNCH_APP=false
+ export LAUNCH_APP
 
 # -e to exit on error
 # -u to exit on unset variables
 # optionnally -x to echo commands
-MY_SET=eux
-export MY_SET
-set -${MY_SET}
+MY_ENV=eux
+export MY_ENV
+set -${MY_ENV}
 
 # scripts & resources directory
 SOURCE_DIR="$(pwd)"/

@@ -5,18 +5,22 @@
 # speed up Linux Package Manager
 # run with arg u  to undo
 
-# display results or not
-[ -n "${MY_DISPLAY+x}"  ] && MY_DISPLAY=true
+# launch after install
+[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+
+# info verbose debug trace
+[[ $MY_TRACE ]] || MY_TRACE=true
+
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[ -n "${MY_SET+x}" ] && MY_SET=eux
-set -"$MY_SET"
+[[ ${MY_ENV} ]] || MY_ENV=eux
+set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[ -n "${ID+x}" ] && . /etc/os-release
+[[ ${ID+x} ]]  || . /etc/os-release
 
 case $ID in
 fedora)
@@ -30,23 +34,23 @@ fedora)
         if grep -q "$line" ./dnf.conf; then
             if [ "$1" = 'u' ]; then
                 sed -i "/$line/d" ./dnf.conf
-                [ "$MY_DISPLAY" == 'true' ] && echo "delete line $line"
+                [ "$LAUNCH_APP" == 'true' ] && echo "delete line $line"
             else
-                [ "$MY_DISPLAY" == 'true' ] && echo "nothing done"
+                [ "$LAUNCH_APP" == 'true' ] && echo "nothing done"
             fi
         else
             if [ "$1" == 'u' ]; then
-                [ "$MY_DISPLAY" == 'true' ] && echo "nothing done"
+                [ "$LAUNCH_APP" == 'true' ] && echo "nothing done"
             else
                 echo "$line" | sudo tee -a ./dnf.conf
-                [ "$MY_DISPLAY" == 'true' ] && echo "added line $line"
+                [ "$LAUNCH_APP" == 'true' ] && echo "added line $line"
             fi
         fi
     done
     #     echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
     #     echo 'deltarpm=true' | sudo tee -a /etc/dnf/dnf.conf
     # fi
-    # [ "$MY_DISPLAY" == 'true' ] && less ./dnf.conf; fi
+    # [ "$LAUNCH_APP" == 'true' ] && less ./dnf.conf; fi
     ;;
 linuxmint | ubuntu)
     echo "$0 not implemented in $ID"
