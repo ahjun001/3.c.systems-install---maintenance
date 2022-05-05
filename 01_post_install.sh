@@ -2,16 +2,19 @@
 # shellcheck disable=
 
 # post install script to install favorite environment, apps, and settings
-OPEN_APP=true
 
-# run silently
- LAUNCH_APP=false
+# launch apps after install
+ LAUNCH_APP=true
  export LAUNCH_APP
+
+# info verbose debug trace
+MY_TRACE=true
+export MY_TRACE
 
 # -e to exit on error
 # -u to exit on unset variables
 # optionnally -x to echo commands
-MY_ENV=eux
+MY_ENV=eu
 export MY_ENV
 set -${MY_ENV}
 
@@ -36,15 +39,15 @@ exit
 
 # install vim
 ./02_vim/02_vim.sh x
-[ "$OPEN_APP" == 'true' ] && vim
+[ "$LAUNCH_APP" == 'true' ] && vim
 
 # install nvim
 ./02_vim/02_nvim.sh x
-[ "$OPEN_APP" == 'true' ] && nvim
+[ "$LAUNCH_APP" == 'true' ] && nvim
 
 # install vscode
 ./02_code/02_code.sh x
-[ "$OPEN_APP" == 'true' ] && code
+[ "$LAUNCH_APP" == 'true' ] && code
 
 # install git, required to install zsh & oh-my-nsh
 ./02_git.sh x

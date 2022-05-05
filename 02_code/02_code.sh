@@ -23,7 +23,7 @@ set -"$MY_ENV"
 [[ ${ID+x} ]]  || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 LOCAL_RES_DIR="$SOURCE_DIR"'Local resources TBU/'
 
 if ! command -v code; then

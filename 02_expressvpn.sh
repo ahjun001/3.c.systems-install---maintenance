@@ -24,7 +24,7 @@ echo "ID = $ID"
 # [[ ${ID+x} ]]  || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 INSTALL_DIR="$SOURCE_DIR"'Local resources TBU/'
 
 case $ID in

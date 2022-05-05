@@ -23,7 +23,7 @@ set -"$MY_ENV"
 [[ ${ID+x} ]]  || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 
 G_MODIFIED=False
 G_FILE=/etc/default/grub

@@ -31,7 +31,7 @@ esac
 if ! command -v zsh; then
 
     # scripts & resources directory
-    [[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+    [[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 
     # link to Github .zshrc
     my_orig="$SOURCE_DIR/02_zsh/.zshrc"

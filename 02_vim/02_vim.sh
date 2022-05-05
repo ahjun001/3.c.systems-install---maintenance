@@ -25,7 +25,7 @@ set -"$MY_ENV"
 [[ ${ID+x} ]]  || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 
 # install gvim if not present yet, and make it default editor
 if ! command -v gvim; then

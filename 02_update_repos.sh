@@ -23,7 +23,7 @@ set -"$MY_ENV"
 [[ ${ID+x} ]]  || . /etc/os-release
 
 # set scripts & resources directory
-[[  ${SOURCE_DIR} ]] && SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 
 # make directories that will contain repositories files (not links to files)
 case $ID in
