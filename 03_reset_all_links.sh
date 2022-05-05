@@ -7,12 +7,13 @@
 # run with arg u  to undo
 
 # display results or not
-[ -z ${MY_DISPLAY+x} ] && MY_DISPLAY=true
+[ -n "${MY_DISPLAY+x}"  ] && MY_DISPLAY=true
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-set -x
+[ -n "${MY_SET+x}" ] && MY_SET=eux
+set -"$MY_SET"
 
 # exiting if not sudo
 if [ "$(id -u)" != "0" ]; then

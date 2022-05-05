@@ -7,13 +7,14 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-set -eu
+[ -n "${MY_SET+x}" ] && MY_SET=eux
+set -"$MY_SET"
 
 # sed -i '6i\
 # # run with arg u  to undo
 
 # # display results or not
-# \[ -z ${MY_DISPLAY+x} \] && MY_DISPLAY=true
+# \[ -n "${MY_DISPLAY+x}"  \] && MY_DISPLAY=true
 # ' tmp.txt
 
 files=(
@@ -31,10 +32,10 @@ lines=(
     '# run with arg u  to undo'
     ''
     '# display results or not'
-    '[ -z ${MY_DISPLAY+x} ] && MY_DISPLAY=true'
+    '[ -n "${MY_DISPLAY+x}"  ] && MY_DISPLAY=true'
 )
 
-# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -z ${MY_DISPLAY+x} \] && MY_DISPLAY=true'
+# MY_STRING='# run with arg u  to undo\n\n display results or not\n \[ -n "${MY_DISPLAY+x}"  \] && MY_DISPLAY=true'
 for line in "${lines[@]}"; do
     MY_STRING+="\n$line"
 done

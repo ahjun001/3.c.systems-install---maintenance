@@ -5,12 +5,13 @@
 OPEN_APP=true
 
 # run silently
- export MY_DISPLAY=false
+ MY_DISPLAY=false
+ export MY_DISPLAY
 
 # -e to exit on error
 # -u to exit on unset variables
 # optionnally -x to echo commands
-MY_SET=eu
+MY_SET=eux
 export MY_SET
 set -${MY_SET}
 
@@ -21,13 +22,15 @@ export SOURCE_DIR
 # export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null
 . /etc/os-release
+echo "ID = $ID"
+export ID
 
 # speed up Linux Package Manager
-./02_speed_up_dnf_n_apt.sh x
+# ./02_speed_up_dnf_n_apt.sh x
 
 # install expressvpn package available in "$SOURCE_DIR"
 ./02_expressvpn.sh x
-
+exit
 # modify grub2 to save default, show count down, install theme
 ./02_grub2.sh x
 
@@ -43,10 +46,10 @@ export SOURCE_DIR
 ./02_code/02_code.sh x
 [ "$OPEN_APP" == 'true' ] && code
 
-# install git, required to install zsh & oh-my-zsh
+# install git, required to install zsh & oh-my-nsh
 ./02_git.sh x
 
-# install zsh & oh-my-zsh
+# install zsh & oh-my-nsh
 ./02_zsh/02_zsh.sh x
 
 # install shellspec
