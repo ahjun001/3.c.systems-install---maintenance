@@ -28,7 +28,7 @@ esac
 set -"$MY_ENV"
 
 # info verbose debug trace
-[[ $MY_TRACE ]] || MY_TRACE=true
+[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
 
 # launch after install
 [[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true

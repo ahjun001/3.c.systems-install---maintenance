@@ -17,7 +17,7 @@ set -"$MY_ENV"
 [[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
-[[ $MY_TRACE ]] || MY_TRACE=true
+[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
 # \[ -n "${LAUNCH_APP+x}"  \] && LAUNCH_APP=true
 # ' tmp.txt
 
@@ -39,7 +39,7 @@ lines=(
 [[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
-[[ $MY_TRACE ]] || MY_TRACE=true'
+[[ ${MY_TRACE+foo} ]] || MY_TRACE=true'
     ''
 )
 

@@ -63,4 +63,7 @@ export MY_TRACE
 # reset all links
 sudo ./03_reset_all_links.sh x
 
+# install google-chrome
+,google-chrome_update.sh
+
 echo "Exiting $0 ..."

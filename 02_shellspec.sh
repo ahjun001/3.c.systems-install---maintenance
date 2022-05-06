@@ -8,7 +8,7 @@
 [[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
-[[ $MY_TRACE ]] || MY_TRACE=true
+[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
 
 # scripts & resources directory
 [[ -n ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
