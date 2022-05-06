@@ -2,36 +2,31 @@
 # shellcheck disable=
 
 # 02_shellspec.sh
-# repeat description of what the script should do
-# run with arg u  to undo
+# wher
 
 # launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ $MY_TRACE ]] || MY_TRACE=true
 
+# scripts & resources directory
+[[ -n ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
-# set environment: ID, SOURCE_DIR
-# shellcheck source=/dev/null
-[[ ${ID+x} ]]  || . /etc/os-release
-
-# scripts & resources directory
-[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
 
 # shellSpec
+
 cli_command=shellspec
 if ! command -v "$cli_command"; then
-    oldwd='pwd'
-    cd "$RESOURCES" || exit
-    if ! wget -O- https://git.io/shellspec | sh; then exit 1; fi
-    cd "$oldwd" || exit
+    cd /tmp || exit
+    if ! wget -O - https://git.io/shellspec | sh; then exit 1; fi
+    cd "$SOURCE_DIR" || exit
 fi
 
 echo " $0 : Exiting ..."

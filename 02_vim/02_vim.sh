@@ -8,7 +8,7 @@
 # run with arg u  to undo
 
 # launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ $MY_TRACE ]] || MY_TRACE=true
@@ -17,15 +17,15 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ ${ID+x} ]]  || . /etc/os-release
+[[ -n ${ID+foo} ]]  || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # install gvim if not present yet, and make it default editor
 if ! command -v gvim; then

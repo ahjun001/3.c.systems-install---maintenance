@@ -7,14 +7,14 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
 # sed -i '6i\
 # # run with arg u  to undo
 
 # # launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ $MY_TRACE ]] || MY_TRACE=true
@@ -36,7 +36,7 @@ lines=(
     '# run with arg u  to undo'
     ''
     '# launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ $MY_TRACE ]] || MY_TRACE=true'
@@ -49,7 +49,7 @@ for line in "${lines[@]}"; do
 done
 MY_STRING="${MY_STRING:2}"
 for file in "${files[@]}"; do
-    if [ "$1" == 'u' ]; then
+    if [ "$1" = 'u' ]; then
         for line in "${lines[@]}"; do
             sed -i "/$line/d" "$file"
         done

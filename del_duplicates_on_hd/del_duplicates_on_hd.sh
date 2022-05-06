@@ -17,16 +17,16 @@ while getopts $OPTSTR flag; do
 done
 
 # creating or checking existance of root directory
-if [ ${ROOT} == ${TEST_DIR} ]; then
+if [ "${ROOT}" = ${TEST_DIR} ]; then
     filename=$0
     filename="${filename%.*}"
     test_file="${filename}""_test.sh" # adding _test to file being tested by convention
-    ./${test_file} -r ${ROOT}
+    ./"${test_file}" -r "${ROOT}"
 else
-    [ ! -d ${ROOT} ] && echo -e "Directory ${ROOT} DOES NOT exists.\nExiting ..." && exit
+    [ ! -d "${ROOT}" ] && echo -e "Directory ${ROOT} DOES NOT exists.\nExiting ..." && exit
 fi
 
-fdupes -rdNS -o name ${ROOT}
+fdupes -rdNS -o name "${ROOT}"
 # r recurse
 # d delete
 # N no prompt
@@ -35,4 +35,4 @@ fdupes -rdNS -o name ${ROOT}
 
 echo -e "\n\n"
 
-find ${ROOT} -type f -name *.txt
+find "${ROOT}" -type f -name '*.txt'

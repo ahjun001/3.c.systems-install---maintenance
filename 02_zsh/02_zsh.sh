@@ -7,12 +7,12 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ ${ID+x} ]]  || . /etc/os-release
+[[ -n ${ID+foo} ]]  || . /etc/os-release
 
 case $ID in
 fedora)
@@ -31,7 +31,7 @@ esac
 if ! command -v zsh; then
 
     # scripts & resources directory
-    [[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
+    [[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
     # link to Github .zshrc
     my_orig="$SOURCE_DIR/02_zsh/.zshrc"
@@ -54,7 +54,7 @@ if ! command -v zsh; then
 
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-nsh/master/tools/install.sh)"
     chsh -s "$(which zsh)"
-    [[ ${ZSH_CUSTOM} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-nsh/custom"
+    [[ -n ${ZSH_CUSTOM+foo} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-nsh/custom"
     git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
     cd "$OLD_WD" || exit 1
 fi

@@ -6,7 +6,7 @@
 # run with arg u  to undo
 
 # launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ $MY_TRACE ]] || MY_TRACE=true
@@ -15,15 +15,15 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ ${ID+x} ]]  || . /etc/os-release
+[[ -n ${ID+foo} ]]  || . /etc/os-release
 
 # set scripts & resources directory
-[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
+[[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # make directories that will contain repositories files (not links to files)
 case $ID in
@@ -68,7 +68,7 @@ done
 cd "$old_pwd" || exit 1
 
 # for ThinkBook, make links from Fedora or Kubuntup to data partition
-if [ "$ID" == 'ubuntu' ] || [ "$ID" == 'fedora' ]; then
+if [ "$ID" = 'ubuntu' ] || [ "$ID" = 'fedora' ]; then
     for repo in "${repos[@]}"; do
         my_orig="$REPOS_DIR"$repo
         my_link="$LINK_DIR"$repo

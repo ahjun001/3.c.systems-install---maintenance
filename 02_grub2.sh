@@ -3,53 +3,120 @@
 
 # 02_grub2.sh
 # modify grub2 to save default, show count down, install theme
-# run with arg u  to undo
 
-# launch after install
-[[ ${LAUNCH_APP} ]]  || LAUNCH_APP=true
+# run with arg x to perform, u  to undo; argument is required to comply with set -u
+case $# in
+0) ACT=x ;; # used when editing modular script
+1) case $1 in
+    x | u) ACT=$1 ;;
+    *) echo "argument when launching $0 should be 'x' or 'u'" && exit 1 ;;
+    esac ;;
+*) echo "error launching $0 : too many arguments" && exit 1 ;;
+esac
 
-# info verbose debug trace
-[[ $MY_TRACE ]] || MY_TRACE=true
+# set environment: ID, SOURCE_DIR
+# shellcheck source=/dev/null
+[[ -n ${ID+foo} ]] || . /etc/os-release
 
+# scripts & resources directory
+[[ -n ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ ${MY_ENV} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
-# set environment: ID, SOURCE_DIR
-# shellcheck source=/dev/null
-[[ ${ID+x} ]]  || . /etc/os-release
+# info verbose debug trace
+[[ -n ${MY_TRACE+foo} ]] || MY_TRACE=true
 
-# scripts & resources directory
-[[  ${SOURCE_DIR} ]] || SOURCE_DIR="$(pwd)"/
+# launch after install
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
-G_MODIFIED=False
+# make an early copy of /etc/default/grub and monitor changes
 G_FILE=/etc/default/grub
-sudo cp "$G_FILE" "$G_FILE"."$(date +%H_%M_%S)"
+[ -f $G_FILE.bak ] || sudo cp ${G_FILE} ${G_FILE}.bak
+G_MODIFIED=false
 
-if ! grep GRUB_SAVEDEFAULT "$G_FILE"; then
-    echo GRUB_SAVEDEFAULT=true | sudo tee -a "$G_FILE"
-    G_MODIFIED=True
+# GRUB_SAVEDEFAULT=true is not in /etc/default/grub at install
+if grep 'GRUB_SAVEDEFAULT=true' "$G_FILE"; then
+    case $ACT in
+    x) [ $MY_TRACE = true ] && echo "GRUB_SAVEDEFAULT=true already in $G_FILE : nothing to do" ;;
+    u) sudo sed -i '/GRUB_SAVEDEFAULT/d' $G_FILE && echo "GRUB_SAVEDEFAULT line deleted in $G_FILE" && G_MODIFIED=true ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
+else
+    case $ACT in
+    x) echo GRUB_SAVEDEFAULT=true | sudo tee -a "$G_FILE" && [ "$MY_TRACE" = true ] && echo "GRUB_SAVEDEFAULT=true added to $G_FILE" && G_MODIFIED=true ;;
+    u) echo "GRUB_SAVEDEFAULT was not found in $G_FILE : nothing to do" ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
 fi
 
-if grep '^GRUB_TERMINAL' "$G_FILE"; then
-    sudo sed -i '/^GRUB_TERMINAL/s/^/# /' "$G_FILE"
-    G_MODIFIED=True
+# GRUB_TERMINAL_OUTPUT='console' is in /etc/default/grub at install.  needs to be commented out to get theme working
+if grep '^GRUB_TERMINAL_OUTPUT' "$G_FILE"; then
+    case $ACT in
+    x) sudo sed -i '/^GRUB_TERMINAL_OUTPUT/s/^/# /' "$G_FILE" && echo "GRUB_TERMINAL_OUTPUT commented out in $G_FILE" && G_MODIFIED=true ;;
+    u) [ $MY_TRACE = true ] && echo "GRUB_TERMINAL_OUTPUT is already active in $G_FILE : nothing to do" ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
+else
+    case $ACT in
+    x) [ $MY_TRACE = true ] && echo "GRUB_TERMINAL_OUTPUT is not active in $G_FILE : nothing to do" ;;
+    u) sudo sed -i '/# GRUB_TERMINAL_OUTPUT/s/# //' "$G_FILE" && echo "GRUB_TERMINAL_OUTPUT line activated in $G_FILE" && G_MODIFIED=true ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
 fi
 
-THEME_DIR=/usr/share/grub/themes/
-[ ! -d "$THEME_DIR"grub2-theme-breeze ] && sudo cp -r "$SOURCE_DIR"'Local resources TBU/themes/grub2-theme-breeze' "$THEME_DIR"
-if ! grep GRUB_THEME "$G_FILE"; then
-    echo GRUB_THEME="/usr/share/grub/themes/grub2-theme-breeze/breeze/theme.txt" | sudo tee -a "$G_FILE"
-    G_MODIFIED=True
+# copy a theme to the new install and activate it in /etc/default/grub
+THEME_DIRS=/usr/share/grub/themes/
+MY_TH_DIR=grub2-theme-breeze
+case $ACT in
+x)
+    if [ -d "$THEME_DIRS" ]; then
+        [ $MY_TRACE = true ] && echo "$THEME_DIRS exists already ; nothing to do"
+    else
+        sudo mkdir -v "$THEME_DIRS"
+    fi
+    if [ -d "$THEME_DIRS$MY_TH_DIR" ]; then
+        [ $MY_TRACE = true ] && echo "$THEME_DIRS$MY_TH_DIR exists already ; nothing to do"
+    else
+        sudo cp -r "$SOURCE_DIR"'Local resources TBU/themes/'"$MY_TH_DIR" "$THEME_DIRS" && [ $MY_TRACE = true ] && echo "$THEME_DIRS$MY_TH_DIR was copied in $THEME_DIRS"
+    fi
+    ;;
+u)
+    if [ -d "$THEME_DIRS$MY_TH_DIR" ]; then
+        sudo rm -rv "$THEME_DIRS$MY_TH_DIR"
+    else
+        [ $MY_TRACE = true ] && echo "$THEME_DIRS$MY_TH_DIR does not exist ; nothing to do"
+    fi
+    if [ -d "$THEME_DIRS" ]; then
+        sudo rmdir -v --ignore-fail-on-non-empty "$THEME_DIRS"
+    else
+        [ $MY_TRACE = true ] && echo "$THEME_DIRS does not exist ; nothing to do"
+    fi
+    ;;
+*) echo "Should never happen" && exit 1 ;;
+esac
+
+# GRUB_THEME is not in /etc/default/grub at install
+if grep 'GRUB_THEME' "$G_FILE"; then
+    case $ACT in
+    x) [ $MY_TRACE = true ] && echo "GRUB_THEME already in $G_FILE : nothing to do" ;;
+    u) sudo sed -i '/GRUB_THEME/d' $G_FILE && echo "GRUB_THEME line deleted in $G_FILE" && G_MODIFIED=true ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
+else
+    case $ACT in
+    x) echo GRUB_THEME="/usr/share/grub/themes/$MY_TH_DIR/breeze/theme.txt" | sudo tee -a "$G_FILE" && [ "$MY_TRACE" = true ] && echo "GRUB_THEME added to $G_FILE" && G_MODIFIED=true ;;
+    u) echo "GRUB_THEME was not found in $G_FILE : nothing to do" ;;
+    *) echo "Should never happen" && exit 1 ;;
+    esac
 fi
 
-ls /etc/default/grub.*_*_*
-read -r -s -n 1 -p "Do housekeeping if needed. Ctrl-C to break or press any one key to continue ..."
-less "$G_FILE"
-if [ $G_MODIFIED == True ]; then
+[ $MY_TRACE = true ] && (diff $G_FILE $G_FILE.bak || true)
+
+if [ $LAUNCH_APP = true ] && [ $G_MODIFIED = true ]; then
     case $ID in
     fedora)
         # sudo rm /boot/efi/EFI/fedora/grub.cfg
