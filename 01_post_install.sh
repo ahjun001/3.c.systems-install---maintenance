@@ -45,10 +45,10 @@ export MY_TRACE
 # install vscode
 ./02_code/02_code.sh x
 
-# install git, required to install zsh & oh-my-nsh
+# install git, required to install zsh & oh-my-zsh
 ./02_git.sh x
 
-# install zsh & oh-my-nsh
+# install zsh & oh-my-zsh
 ./02_zsh/02_zsh.sh x
 
 # install shellspec

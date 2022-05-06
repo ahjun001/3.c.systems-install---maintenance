@@ -2,7 +2,7 @@
 # shellcheck disable=
 
 # 02_git.sh
-# install git, required to install zsh & oh-my-nsh
+# install git, required to install zsh & oh-my-zsh
 # run with arg u  to undo
 
 # launch after install
