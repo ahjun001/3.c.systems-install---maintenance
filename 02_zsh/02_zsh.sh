@@ -2,7 +2,7 @@
 # shellcheck disable=
 
 # 02_zsh.sh
-# install zsh & oh-my-nsh
+# install zsh & oh-my-zsh
 
 # -e to exit on error
 # -u to exit on unset variables
@@ -27,7 +27,7 @@ linuxmint | ubuntu)
     ;;
 esac
 
-# zsh and oh-my-nsh
+# zsh and oh-my-zsh
 if ! command -v zsh; then
 
     # scripts & resources directory
@@ -48,13 +48,13 @@ if ! command -v zsh; then
     # read -r -s -n 1 -p "zsh needs to be run at least once, "
     # zsh
 
-    # install oh-my-nsh
+    # install oh-my-zsh
     OLD_WD=$(pwd)
     cd /tmp || exit 1
 
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-nsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     chsh -s "$(which zsh)"
-    [[ -n ${ZSH_CUSTOM+foo} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-nsh/custom"
+    [[ -n ${ZSH_CUSTOM+foo} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
     git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
     cd "$OLD_WD" || exit 1
 fi
