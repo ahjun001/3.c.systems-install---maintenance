@@ -64,6 +64,12 @@ export MY_TRACE
 sudo ./03_reset_all_links.sh x
 
 # install google-chrome
-,google-chrome_update.sh
+,google-chrome_update.sh x
+
+# install brave
+./02_brave.sh x
+
+# install nodeJS & npm, pre-requisites for nativefier -- which transforms websites into web apps
+./02_npm.sh x
 
 echo "Exiting $0 ..."

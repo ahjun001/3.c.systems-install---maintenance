@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # shellcheck disable=
 
-# 00_model.sh
-# repeat description of what the script should do
+# 02_npm.sh
+# install nodeJS & npm, pre-requisites for nativefier -- which transforms websites into web apps
 
 # run with arg x to perform, u  to undo; argument is required to comply with set -u
-case $# in
-0) ACT=x ;; # used when editing modular script
-1) case $1 in
-    x | u) ACT=$1 ;;
-    *) echo "argument when launching $0 should be 'x' or 'u'" && exit 1 ;;
-    esac ;;
-*) echo "error launching $0 : too many arguments" && exit 1 ;;
-esac
+# case $# in
+# 0) ACT=x ;; # used when editing modular script
+# 1) case $1 in
+#     x | u) ACT=$1 ;;
+#     *) echo "argument when launching $0 should be 'x' or 'u'" && exit 1 ;;
+#     esac ;;
+# *) echo "error launching $0 : too many arguments" && exit 1 ;;
+# esac
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
@@ -35,12 +35,10 @@ set -"$MY_ENV"
 
 case $ID in
 fedora)
-    echo "$0 not implemented in $ID"
-    exit 1
+    sudo dnf install npm
     ;;
 linuxmint | ubuntu)
-    echo "$0 not implemented in $ID"
-    exit 1
+    sudo apt install npm
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
@@ -48,7 +46,6 @@ linuxmint | ubuntu)
     ;;
 esac
 
-[[ $LAUNCH_APP = true ]] && 00_model
+[[ $LAUNCH_APP = true ]] && npm --version
 
-echo "ACT = $ACT Should remove this to use the script" && exit 1
 echo " $0 : Exiting ..."
