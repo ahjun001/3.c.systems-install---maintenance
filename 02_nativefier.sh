@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=
 
-# 00_model.sh
-# repeat description of what the script should do
+# 02_nativefier.sh
+# install natifvefier, transforms websites into web apps
 
 # run with arg x to perform, u  to undo; argument is required to comply with set -u
 # case $# in
@@ -33,20 +33,12 @@ set -"$MY_ENV"
 # launch after install
 [[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
-case $ID in
-fedora)
-    echo "$0 not implemented in $ID"
-    exit 1
-    ;;
-linuxmint | ubuntu)
-    echo "$0 not implemented in $ID"
-    exit 1
-    ;;
-*)
-    echo "Distribution $ID not recognized, exiting ..."
-    exit 1
-    ;;
-esac
+sudo npm install nativefier -g
 
-# echo "ACT = $ACT Should remove this to use the script" && exit 1
+[[ $LAUNCH_APP = true ]] && (cd /tmp || exit) && nativefier -p linux -a x64 \
+    -u 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/89.0.4389.72 Safari/537.36' \
+    https://youtube.com
+
+[[ $LAUNCH_APP = true ]] && /tmp/YouTube-linux-x64/YouTube
+
 echo " $0 : Exiting ..."
