@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 clear
-set -x
+set -eux
 expressvpn status
 cat <<EOF
 
@@ -12,12 +12,22 @@ cat <<EOF
 
 
 EOF
-sudo apt update -y && sudo apt upgrade -y
-# sudo apt autoremove -y
-# sudo systemctl restart NetworkManager
+
+# set environment: ID
+# shellcheck source=/dev/null
+[[ -n ${ID+foo} ]] || . /etc/os-release
+
+case $ID in
+fedora) sudo dnf -y update ;;
+linuxmint | ubuntu) sudo apt update -y && sudo apt upgrade -y ;;
+*) echo "Should not happen" && exit 1 ;;
+esac
 cat <<EOF
 
 
 EOF
-sudo yt-dlp -U
-set +x
+case $ID in
+fedora) true ;;
+linuxmint | ubuntu) sudo yt-dlp -U ;;
+*) echo "Should not happen" && exit 1 ;;
+esac
