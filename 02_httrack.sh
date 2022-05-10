@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=
 
-# 00_model.sh
-# repeat description of what the script should do
+# 02_httrack.sh
+# install httrack, copy websites to computer & browse locally
 
 # run with arg x to perform, u  to undo; argument is required to comply with set -u
 # case $# in

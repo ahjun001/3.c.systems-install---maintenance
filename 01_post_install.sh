@@ -78,7 +78,7 @@ sudo ./03_reset_all_links.sh x
 # install gimp
 ./02_gimp.sh x
 
-# install httrack
+# install httrack, copy websites to computer & browse locally
 ./02_httrack.sh
 
 echo "Exiting $0 ..."
