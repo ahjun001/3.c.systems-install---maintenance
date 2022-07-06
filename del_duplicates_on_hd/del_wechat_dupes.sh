@@ -73,7 +73,7 @@ delete_list=(
     'Télérama'
     'True Detective'
     'Valeurs Actuelles'
-    SChina
+    5China
 )
 
 my_command=delete
