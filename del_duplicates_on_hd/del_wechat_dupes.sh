@@ -23,38 +23,67 @@ delete_list=(
     'Business Traveller'
     Challenges
     Closer
+    'Consumer Reports'
+    Courrier_International
     Cuisine
+    Échos
     Femina
+    'Femme Actuelle'
     FigTV
     Ici_Paris
     Journal
+    'La Croix'
+    LaCroix
+    'Le Figaro'
     lefigaro
     Le_Figaro
+    Le_Journal
+    'Le Journal'
     lemonde
     LeMonde
     'Le Monde'
     'LE MONDE'
     'Le nouvel'
+    'Le Parisien'
+    'Le Point'
     "L'Equipe"
     lequipe
+    Les_Inrockuptibles
+    'Le Temps'
+    "L'Express"
     lhumanite
+    "L'Obs"
     "L'Opinion"
     lesechos
     'Les Echos'
     libe
+    lib1
     Madame
     Maison
+    Marianne
     Marie_Claire
     "Mens Health"
     "Midi Olympique"
+    Moustique
     Paris_Match
     TV
+    Society
+    Stereophile
+    'Télé Obs'
+    'Télérama'
+    'True Detective'
+    'Valeurs Actuelles'
+    SChina
 )
 
+my_command=delete
+# my_command=print
+
 for name in "${delete_list[@]}"; do
-    # find . -name "$name*.pdf" -exec ls {} \;
-    find . -name "$name*.pdf" -exec rm {} \;
+    find . -name "$name*.pdf" -"$my_command"
 done
+
+find . -name "*.gif" -"$my_command"
 
 df -h / | tee -a free_space.txt
 
