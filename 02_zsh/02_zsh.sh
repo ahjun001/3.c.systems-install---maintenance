@@ -49,14 +49,14 @@ if ! command -v zsh; then
     # zsh
 
     # install oh-my-zsh
-    OLD_WD=$(pwd)
-    cd /tmp || exit 1
+    # OLD_WD=$(pwd)
+    # cd /tmp || exit 1
 
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    chsh -s "$(which zsh)"
-    [[ -n ${ZSH_CUSTOM+foo} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
-    git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
-    cd "$OLD_WD" || exit 1
+    # sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    # chsh -s "$(which zsh)"
+    # [[ -n ${ZSH_CUSTOM+foo} ]] ||  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+    # git clone https://github.com/jeffreytse/zsh-vi-mode "$ZSH_CUSTOM"/plugins/zsh-vi-mode
+    # cd "$OLD_WD" || exit 1
 fi
 
 echo " $0 : Exiting ..."
