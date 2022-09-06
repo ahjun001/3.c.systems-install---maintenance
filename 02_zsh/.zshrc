@@ -73,4 +73,5 @@ autoload -U colors && colors
 zstyle ':vcs_info:git*' formats " %{$fg[magenta]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
 setopt PROMPT_SUBST
 RPROMPT='%1v [%*]'
-PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[green]%}%m %{$fg[blue]%}%~ %{$reset_color%}${vcs_info_msg_0_}%(!.#.$)'
+# PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[green]%}%m %{$fg[blue]%}%~ %{$reset_color%}${vcs_info_msg_0_}%(!.#.$)'
+PROMPT='%{$fg[green]%}%m %{$fg[blue]%}%~ %{$reset_color%}${vcs_info_msg_0_}%(!.#.$) '
