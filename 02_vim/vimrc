@@ -53,20 +53,27 @@ endif
 " }}}
 
 " Set both tabstops and shiftwidth to 4 --pjp
-set ts=4
-set sw=4
+set ts=4 " default = 8
+set sw=4 " default = 8
 
 
 " Set modeline on so that last line settings are activated --pjp
-set modeline
+if has ('nvim')
+else
+        set modeline  " nvim default
+endif
 
 " Set a meaningful default foldexpr, different from 0
 set foldexpr=getline(v:lnum-2)=~'^\\s*$'&&getline(v:lnum-1)=~'^\\s*$'&&getline(v:lnum)=~'\\S'?'>1':1  
 
+
 " Set color sheme --pjp
-command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 if has('nvim')
-        colorscheme blue
+        "colorscheme murphy " black background --pjp
+        "colorscheme delek      " light yellow background, some colors unclear
+        "colorscheme peachpuff   " orange background
+        colorscheme default
+        "colorscheme blue
 else
         "colorscheme murphy " black background --pjp
         "colorscheme delek      " light yellow background, some colors unclear
@@ -88,8 +95,6 @@ command! WipeOl set vi+='0 | wv!
 if !exists('g:vscode')
         " number lines --pjp
         set nu rnu
-
-
 
         " Setting displayed and saved encoding --pjp
         set encoding=utf-8  " The encoding displayed. Default is =latin1
@@ -222,7 +227,10 @@ if !exists('g:vscode')
         set ar
 
         " get the mouse connected --pjp
-        set mouse=a
+        if has('nvim')
+        else
+            set mouse=a
+        endif
 
         " Making chars visible and look like >--- --pjp
         set list
@@ -240,4 +248,4 @@ if !exists('g:vscode')
 
 endif
 
-" vim: tw=0:fdm=marker:
+" vim: tw=0:fdm=expr:

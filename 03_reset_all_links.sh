@@ -7,11 +7,10 @@
 # run with arg u  to undo
 
 # launch after install
-[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-
 
 # -e to exit on error
 # -u to exit on unset variables
@@ -19,32 +18,33 @@
 [[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
+# util function to force to recreate possibly existing link and check that it is not broken
+make_a_link() {
+   if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+      exit 1
+   fi
+}
+
 # exiting if not sudo
 if [ "$(id -u)" != "0" ]; then
    echo 'this script requires root privileges'
    exit 1
 fi
 
-# link to Github vimrc
+# link vim to Github vimrc
 my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_vim/vimrc'
 my_link=/home/perubu/.vim/"$(basename $my_orig)"
-# force to recreate possibly existing link and check that it is not broken
-if ! ln -fs "$my_orig" "$my_link"; then
-   if [ ! -e "${my_link}" ]; then
-      exit 1
-   fi
-   exit 1
-fi
+make_a_link
+
+# link nvim to Github vimrc
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_vim/vimrc'
+my_link=/home/perubu/.config/nvim/init.vim
+make_a_link
 
 # link to Github .zshrc
 my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_zsh/.zshrc'
 my_link=/home/perubu/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link"; then
-   if [ ! -e "${my_link}" ]; then
-      exit 1
-   fi
-   exit 1
-fi
+make_a_link
 
 # link to all Github bash scripts whose filename starts with ,
 if ! find /home/perubu/Documents/Github/3.c-install-n-utils/ \
@@ -68,16 +68,11 @@ fi
 # link to VSCode tasks.json
 my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_code/User/tasks.json'
 my_link=/home/perubu/.config/Code/User/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
-   exit 1
-fi
+make_a_link
 
 # put shellSpec in path
 my_orig='/home/perubu/.local/lib/shellspec/shellspec'
 my_link=/usr/local/sbin/"$(basename "$my_orig")"
-if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
-   exit 1
-fi
-
+make_a_link
 
 echo -e "\nExiting $0\n"
