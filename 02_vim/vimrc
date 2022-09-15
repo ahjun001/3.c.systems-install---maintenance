@@ -69,11 +69,22 @@ set foldexpr=getline(v:lnum-2)=~'^\\s*$'&&getline(v:lnum-1)=~'^\\s*$'&&getline(v
 
 " Set color sheme --pjp
 if has('nvim')
-        "colorscheme murphy " black background --pjp
-        "colorscheme delek      " light yellow background, some colors unclear
-        "colorscheme peachpuff   " orange background
-        colorscheme default
+        "colorschemes from ~/.vim/vim/runtime/colors"
+        "colorscheme default
         "colorscheme blue
+        "colorscheme darkblue
+        "colorscheme delek      " light yellow background, some colors unclear
+        "colorscheme elflord
+        "colorscheme evening
+        "colorscheme industry
+        "colorscheme murphy " black background --pjp
+        colorscheme peachpuff   " orange background
+        "colorscheme 
+        "colorscheme 
+        "colorscheme 
+        "colorscheme 
+        "colorscheme 
+        "colorscheme 
 else
         "colorscheme murphy " black background --pjp
         "colorscheme delek      " light yellow background, some colors unclear
