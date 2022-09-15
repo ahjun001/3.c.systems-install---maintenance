@@ -68,28 +68,26 @@ set foldexpr=getline(v:lnum-2)=~'^\\s*$'&&getline(v:lnum-1)=~'^\\s*$'&&getline(v
 
 
 " Set color sheme --pjp
-if has('nvim')
-        "colorschemes from ~/.vim/vim/runtime/colors"
-        "colorscheme default
-        "colorscheme blue
-        "colorscheme darkblue
-        "colorscheme delek      " light yellow background, some colors unclear
-        "colorscheme elflord
-        "colorscheme evening
-        "colorscheme industry
-        "colorscheme murphy " black background --pjp
-        colorscheme peachpuff   " orange background
-        "colorscheme 
-        "colorscheme 
-        "colorscheme 
-        "colorscheme 
-        "colorscheme 
-        "colorscheme 
+if $TERM == 'linux'
+        colorscheme darkblue
 else
-        "colorscheme murphy " black background --pjp
-        "colorscheme delek      " light yellow background, some colors unclear
-        colorscheme peachpuff   " orange background
-        "colorscheme default
+        if has('nvim')
+                "colorschemes from ~/.vim/vim/runtime/colors"
+                "colorscheme default
+                "colorscheme blue
+                "colorscheme darkblue
+                "colorscheme delek
+                "colorscheme elflord
+                "colorscheme evening
+                "colorscheme industry
+                "colorscheme murphy " black background --pjp
+                colorscheme peachpuff   " orange background
+        else
+                "colorscheme murphy " black background --pjp
+                "colorscheme delek      " light yellow background, some colors unclear
+                colorscheme peachpuff   " orange background
+                "colorscheme default
+        endif
 endif
 
 " Wipe all registers --pjp
