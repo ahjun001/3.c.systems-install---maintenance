@@ -27,7 +27,7 @@ cat <<EOF
 
 EOF
 case $ID in
-fedora) true ;;
 linuxmint | ubuntu) sudo yt-dlp -U ;;
+fedora) ;;
 *) echo "Should not happen" && exit 1 ;;
 esac
