@@ -18,3 +18,4 @@ fi
 
 set +x
 printf 'Exiting %s' "$0"
+echo "$(basename -- "$0") exited with code=$?"

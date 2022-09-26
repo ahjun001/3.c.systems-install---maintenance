@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #remove
 clear
 sudo apt autoremove -y
@@ -132,3 +133,5 @@ if [ -e /usr/share/fonts/truetype/malayalam ]; then sudo rm -rfv /usr/share/font
 # sudo apt install --reinstall fonts-arphic-ukai fonts-arphic-uming fonts-droid-fallback fonts-noto-cjk fonts-wqy-microhei
 
 fc-cache -rf
+
+echo "$(basename -- "$0") exited with code=$?"

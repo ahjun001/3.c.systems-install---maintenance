@@ -71,4 +71,4 @@ linuxmint | ubuntu)
     ;;
 esac
 
-echo -e "\n $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

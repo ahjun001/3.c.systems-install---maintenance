@@ -14,7 +14,7 @@ set -"$MY_ENV"
 # # run with arg u  to undo
 
 # # launch after install
-[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ ${MY_TRACE+foo} ]] || MY_TRACE=true
@@ -59,3 +59,5 @@ for file in "${files[@]}"; do
     fi
     less "$file"
 done
+
+echo "$(basename -- "$0") exited with code=$?"

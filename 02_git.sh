@@ -6,11 +6,10 @@
 # run with arg u  to undo
 
 # launch after install
-[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-
 
 # -e to exit on error
 # -u to exit on unset variables
@@ -20,10 +19,10 @@ set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ -n ${ID+foo} ]]  || . /etc/os-release
+[[ -n ${ID+foo} ]] || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
+[[ ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 packageNeeded=git
 case $ID in
@@ -31,7 +30,7 @@ fedora)
     sudo dnf install "$packageNeeded"
     ;;
 linuxmint | ubuntu)
-    sudo apt install  "$packageNeeded"
+    sudo apt install "$packageNeeded"
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
@@ -39,4 +38,4 @@ linuxmint | ubuntu)
     ;;
 esac
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

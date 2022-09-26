@@ -37,3 +37,5 @@ echo done.
 echo if no error was reported, then freemind got installed. Type \'freemind\' to try. You might want to add a menu entry pointing to this file:
 which freemind
 echo
+
+echo "$(basename -- "$0") exited with code=$?"

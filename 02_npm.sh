@@ -48,4 +48,4 @@ esac
 
 [[ $LAUNCH_APP = true ]] && npm --version
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

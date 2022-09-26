@@ -24,8 +24,8 @@ MY_TRACE=true
 export MY_TRACE
 
 # launch apps after install
- LAUNCH_APP=true
- export LAUNCH_APP
+LAUNCH_APP=true
+export LAUNCH_APP
 
 # speed up Linux Package Manager
 # ./02_speed_up_dnf_n_apt.sh x
@@ -81,4 +81,4 @@ sudo ./03_reset_all_links.sh x
 # install httrack, copy websites to computer & browse locally
 ./02_httrack.sh
 
-echo "Exiting $0 ..."
+echo "$(basename -- "$0") exited with code=$?"

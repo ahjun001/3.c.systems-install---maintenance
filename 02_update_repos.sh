@@ -81,4 +81,5 @@ if [ "$ID" = 'ubuntu' ] || [ "$ID" = 'fedora' ]; then
     done
 fi
 
-echo " $0 : Exiting ..."
+
+echo "$(basename -- "$0") exited with code=$?"

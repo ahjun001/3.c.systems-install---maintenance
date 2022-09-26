@@ -65,3 +65,5 @@ linuxmint | ubuntu)
 
 esac
 [ "$LAUNCH_APP" = true ] && expressvpn --version
+
+echo "$(basename -- "$0") exited with code=$?"

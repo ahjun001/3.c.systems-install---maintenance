@@ -41,4 +41,4 @@ esac
 
 [ $LAUNCH_APP = true ] && google-chrome
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

@@ -75,4 +75,4 @@ my_orig='/home/perubu/.local/lib/shellspec/shellspec'
 my_link=/usr/local/sbin/"$(basename "$my_orig")"
 make_a_link
 
-echo -e "\nExiting $0\n"
+echo "$(basename -- "$0") exited with code=$?"

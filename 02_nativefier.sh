@@ -41,4 +41,4 @@ sudo npm install nativefier -g
 
 [[ $LAUNCH_APP = true ]] && /tmp/YouTube-linux-x64/YouTube
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

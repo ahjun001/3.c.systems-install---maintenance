@@ -184,3 +184,5 @@ set +x
 # create check_n_pin.sh as apps are installed
 # group apps
 # install difficult first and create a backup
+
+echo "$(basename -- "$0") exited with code=$?"

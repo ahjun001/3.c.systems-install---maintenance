@@ -19,7 +19,6 @@
 [[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
-
 # shellSpec
 
 cli_command=shellspec
@@ -29,4 +28,4 @@ if ! command -v "$cli_command"; then
     cd "$SOURCE_DIR" || exit
 fi
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

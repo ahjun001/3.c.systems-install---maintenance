@@ -26,3 +26,5 @@ fi
 printf '\nInstall Wenlin, WeChat\n, Internet Explorer'
 
 ## sudo apt update
+
+echo "$(basename -- "$0") exited with code=$?"

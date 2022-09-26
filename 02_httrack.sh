@@ -40,4 +40,4 @@ linuxmint | ubuntu) sudo apt install httrack ;;
 esac
 
 # echo "ACT = $ACT Should remove this to use the script" && exit 1
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"

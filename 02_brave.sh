@@ -62,4 +62,4 @@ esac
 
 [[ $LAUNCH_APP = true ]] && brave-browser
 
-echo " $0 : Exiting ..."
+echo "$(basename -- "$0") exited with code=$?"
