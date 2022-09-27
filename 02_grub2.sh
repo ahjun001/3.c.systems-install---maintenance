@@ -134,4 +134,4 @@ if [ $LAUNCH_APP = true ] && [ $G_MODIFIED = true ]; then
     esac
 fi
 
-echo "$(basename -- "$0") exited with code=$?"
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

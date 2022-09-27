@@ -32,4 +32,4 @@ fedora) ;;
 *) echo "Should not happen" && exit 1 ;;
 esac
 
-echo "$(basename -- "$0") exited with code=$?"
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

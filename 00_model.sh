@@ -49,4 +49,4 @@ linuxmint | ubuntu)
 esac
 
 # echo "ACT = $ACT Should remove this to use the script" && exit 1
-echo "$(basename -- "$0") exited with code=$?"
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

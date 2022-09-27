@@ -694,4 +694,4 @@ batch_9()  {	msg="9. old kylin-software-center" # {{{
 
 # vim:ft=sh:fdm=marker:
 
-echo "$(basename -- "$0") exited with code=$?"
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
