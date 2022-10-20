@@ -48,4 +48,4 @@ fi
 
 if ! command -v nvim; then exit 1; fi
 
-echo " $0 : Exiting ..."
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

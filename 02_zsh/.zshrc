@@ -4,10 +4,14 @@
 # promptinit
 # prompt adam1
 
-setopt histignorealldups sharehistory
+setopt histignorealldups sharehistory extendedglob
 
 # Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+# bindkey -e # pjp
+
+# use zsh-vi-mode from https://github.com/jeffreytse/zsh-vi-mode
+# git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-vi-mode
+source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000

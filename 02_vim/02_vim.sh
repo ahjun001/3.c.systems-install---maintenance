@@ -54,4 +54,4 @@ ln -fs "$SOURCE_DIR"/02_vim/vimrc ~/.vim/vimrc
 
 if ! command -v gvim ; then exit 1; fi
 
-echo " $0 : Exiting ..."
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

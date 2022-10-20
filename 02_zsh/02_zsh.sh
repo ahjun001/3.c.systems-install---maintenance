@@ -43,6 +43,8 @@ if ! command -v zsh; then
         exit 1
     fi
 
+    # download zsh-vi-mode plugin
+    git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-vi-mode
     # install zsh
     sudo "$PKG_MGR" install zsh
     # read -r -s -n 1 -p "zsh needs to be run at least once, "
@@ -59,4 +61,4 @@ if ! command -v zsh; then
     # cd "$OLD_WD" || exit 1
 fi
 
-echo " $0 : Exiting ..."
+echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
