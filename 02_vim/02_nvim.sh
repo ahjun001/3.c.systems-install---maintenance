@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 # shellcheck disable=
 
-# 00_nvim.sh
-# install nvim after vim has been installed
-# run with arg u  to undo
+# 02_nvim.sh
+# repeat description of what the script should do
 
-# launch after install
-[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
+# run with arg x to perform, u  to undo; argument is required to comply with set -u
+# case $# in
+# 0) ACT=x ;; # used when editing modular script
+# 1) case $1 in
+#     x | u) ACT=$1 ;;
+#     *) echo "argument when launching $0 should be 'x' or 'u'" && exit 1 ;;
+#     esac ;;
+# *) echo "error launching $0 : too many arguments" && exit 1 ;;
+# esac
 
-# info verbose debug trace
-[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
+# set environment: ID, SOURCE_DIR
+# shellcheck source=/dev/null
+[[ -n ${ID+foo} ]] || . /etc/os-release
 
+# scripts & resources directory
+[[ -n ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # -e to exit on error
 # -u to exit on unset variables
@@ -18,34 +27,26 @@
 [[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
 set -"$MY_ENV"
 
-# set environment: ID, SOURCE_DIR
-# shellcheck source=/dev/null
-[[ -n ${ID+foo} ]]  || . /etc/os-release
+# info verbose debug trace
+[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
 
-# scripts & resources directory
-[[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
+# launch after install
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
-# install neovim, run nvim
+case $ID in
+fedora)
+    echo "$0 not implemented in $ID"
+    exit 1
+    ;;
+linuxmint | ubuntu)
+    echo "$0 not implemented in $ID"
+    exit 1
+    ;;
+*)
+    echo "Distribution $ID not recognized, exiting ..."
+    exit 1
+    ;;
+esac
 
-if ! command -v nvim; then
-    install_dir='/opt/nvim/'
-    if [ ! -d "$install_dir" ]; then
-        sudo mkdir -p "$install_dir"
-        sudo chown perubu:perubu "$install_dir"
-    fi
-
-    install_file="$install_dir"nvim.appimage
-    if [ ! -f "$install_file" ]; then
-        sudo wget -P "$install_dir" https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-        # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o "$install_file"
-        sudo chmod +x "$install_file" || exit 1
-    fi
-
-    sudo ln -fs "$install_file" /usr/local/bin/nvim
-
-    sudo ln -fs "$SOURCE_DIR"/02_vim/vimrc /usr/share/sysinit.vim
-fi
-
-if ! command -v nvim; then exit 1; fi
-
+# echo "ACT = $ACT Should remove this to use the script" && exit 1
 echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
