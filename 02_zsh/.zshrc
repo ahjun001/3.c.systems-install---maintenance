@@ -1,15 +1,48 @@
-
 # Use modern completion system
 autoload -Uz compinit
 compinit
 
+# prompt theme system for changing prompt easily
+# source: $ man zshroadmap
+autoload -U promptinit
+promptinit
+
+# vcs_info will show if current directory is a local repo and the active branch name
 autoload -Uz vcs_info
 precmd() {
   psvar[1]=$(expressvpn status | grep -q Not && echo 'VPN:Off' || echo 'VPN:On')
-# Load version control information
+  # Load version control information
   vcs_info
 }
- 
+
 setopt PROMPT_SUBST
-RPROMPT='%1v [%*]'
-PROMPT='%{$fg[green]%}%n %{$fg[blue]%}%~ %{$reset_color%}${vcs_info_msg_0_}%(!.#.$) '
+RPROMPT='%1v[%*]'
+PROMPT='%F{green}%n%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%(!.#.$) '
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Preferred editor for local and remote sessions -- pjp
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='code'
+else
+  export EDITOR='vim.tiny'
+fi
+
+# Suffix aliases -- pjp
+alias -s pdf=xreader
+alias -s txt=vim
+alias -s json=code
+alias -s py=code
+alias -s {html, cs, js, ts}=code
+
+# Vi key bindings in insert mode
+# Esc for command mode then usual navigation vi commands will work
+bindkey -v
+# so far it looks as if this works well, if not
+# OR
+# use zsh-vi-mode from https://github.com/jeffreytse/zsh-vi-mode
+# git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-vi-mode
+# source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
