@@ -46,3 +46,17 @@ bindkey -v
 # use zsh-vi-mode from https://github.com/jeffreytse/zsh-vi-mode
 # git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-vi-mode
 # source $HOME/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# cd dir_name can be input as dir_name
+setopt AUTO_CD
+
+# global aliases
+alias -g L='| less'
+alias -g NUL="> /dev/null 2>&1"  # ls exist non_exist NUL  is silenced
+
+# hashes
+hash -d github=$HOME/Documents/Github   # cd ~github   made easy
+hash -d wip=$HOME/Desktop/temp   # cd ~wip    easier, to be updated
+
+# alias completion
+# setopt COMPLETE_ALIASES   # no evident difference

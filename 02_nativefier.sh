@@ -2,7 +2,7 @@
 # shellcheck disable=
 
 # 02_nativefier.sh
-# install natifvefier, transforms websites into web apps
+# install nativefier, transforms websites into web apps
 
 # run with arg x to perform, u  to undo; argument is required to comply with set -u
 # case $# in
