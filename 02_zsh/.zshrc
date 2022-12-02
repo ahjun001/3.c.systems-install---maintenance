@@ -19,10 +19,13 @@ setopt PROMPT_SUBST
 RPROMPT='%1v[%*]'
 PROMPT='%F{green}%n%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%(!.#.$) '
 
+# working with history
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS INC_APPEND_HISTORY SHARE_HISTORY
+
 
 # Preferred editor for local and remote sessions -- pjp
 if [[ -n $SSH_CONNECTION ]]; then
