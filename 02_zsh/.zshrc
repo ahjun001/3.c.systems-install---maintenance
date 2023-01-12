@@ -10,13 +10,13 @@ promptinit
 # vcs_info will show if current directory is a local repo and the active branch name
 autoload -Uz vcs_info
 precmd() {
-  psvar[1]=$(expressvpn status | grep -q Not && echo 'VPN:Off' || echo 'VPN:On')
+  # psvar[1]=$(expressvpn status | grep -q Not && echo 'VPN:Off' || echo 'VPN:On')
   # Load version control information
   vcs_info
 }
 
 setopt PROMPT_SUBST
-RPROMPT='%1v[%*]'
+# RPROMPT='%1v[%*]'
 PROMPT='%F{green}%n%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f%(!.#.$) '
 
 # working with history
@@ -63,3 +63,6 @@ hash -d wip=$HOME/Desktop/temp   # cd ~wip    easier, to be updated
 
 # alias completion
 # setopt COMPLETE_ALIASES   # no evident difference
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
