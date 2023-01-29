@@ -39,14 +39,16 @@ fedora)
     exit 1
     ;;
 linuxmint | ubuntu)
-    echo "$0 not implemented in $ID"
-    exit 1
+    sudo apt install ~/Downloads/nvim-linux64.deb 
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
     exit 1
     ;;
 esac
+
+mkdir -p ~/.config/nvim/
+ln -fs "$SOURCE_DIR"/02_vim/vimrc ~/.config/nvim/init.vim
 
 # echo "ACT = $ACT Should remove this to use the script" && exit 1
 echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

@@ -37,11 +37,11 @@ fedora)
     ;;
 ubuntu)
     echo "$0 not implemented in $ID"
-    exit 1
+    exit 0
     ;;
 linuxmint)
     echo "$0 not implemented in $ID"
-    # exit 1
+    # exit 0
     ;;
 esac
 

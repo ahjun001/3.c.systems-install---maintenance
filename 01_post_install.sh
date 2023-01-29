@@ -52,13 +52,13 @@ export LAUNCH_APP
 ./02_zsh/02_zsh.sh x
 
 # install shellspec
-./02_shellspec.sh x
+# ./02_shellspec.sh x bugs if already installed
 
 # mount data partition
 ./02_mount_data.sh x
 
 # update repositories, possibly on data partition
-./02_update_repos.sh x
+# ./02_update_repos.sh x   to be fixed which data partition?
 
 # reset all links
 sudo ./03_reset_all_links.sh x
