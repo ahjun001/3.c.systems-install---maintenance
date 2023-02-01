@@ -111,5 +111,3 @@ if [ "$command_args_ok" = true ]; then
     esac
 
 fi
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

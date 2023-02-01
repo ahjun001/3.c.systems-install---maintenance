@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
 
-# 02_git.sh
-# install git, required to install zsh & oh-my-zsh
+# 02_fcitx.sh
+# manages IME for Chinese input
 
 # shellcheck source=/dev/null
 . ./01_set_env_variables.sh
 
-packageNeeded=git
 # Exit if command is already installed
-if command -v "$packageNeeded" >>"$INSTALL_LOG"; then
+if command -v fcitx >>"$INSTALL_LOG"; then
     if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then exit 0; else return 0; fi
 fi
 
 case $ID in
 fedora)
-    sudo dnf install "$packageNeeded"
+    echo "$0 not implemented in $ID"
     ;;
 linuxmint | ubuntu)
-    sudo apt install "$packageNeeded"
+    sudo apt install fcitx fcitx-sunpinyin
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
     exit 1
     ;;
 esac
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

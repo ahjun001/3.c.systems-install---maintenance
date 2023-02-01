@@ -10,7 +10,7 @@ sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal mai
 sudo apt update
 sudo apt install --install-recommends winehq-stable
 sudo apt update
-winecfg  # important to start with this command so as to trigger Mono & Gecko downloads
+winecfg # important to start with this command so as to trigger Mono & Gecko downloads
 wine --version
 
 exit
@@ -26,5 +26,3 @@ fi
 printf '\nInstall Wenlin, WeChat\n, Internet Explorer'
 
 ## sudo apt update
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

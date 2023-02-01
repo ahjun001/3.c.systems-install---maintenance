@@ -1,28 +1,10 @@
 #!/usr/bin/env bash
-# shellcheck disable=
 
 # 02_mount_data.sh
 # mount data partition
-# run with arg u  to undo
 
-# launch after install
-[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
-
-# info verbose debug trace
-[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-
-# -e to exit on error
-# -u to exit on unset variables
-# -x to echo commands for degub purposes
-[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
-set -"$MY_ENV"
-
-# set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ -n ${ID+foo} ]] || . /etc/os-release
-
-# scripts & resources directory
-[[ ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
+. ./01_set_env_variables.sh
 
 case $ID in
 fedora)
@@ -35,14 +17,8 @@ fedora)
     # plasma-discover
     fi
     ;;
-ubuntu)
+ubuntu | linuxmint)
     echo "$0 not implemented in $ID"
     exit 0
     ;;
-linuxmint)
-    echo "$0 not implemented in $ID"
-    # exit 0
-    ;;
 esac
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

@@ -3,82 +3,74 @@
 
 # post install script to install favorite environment, apps, and settings
 
-# export set environment, mainly ID = linuxmint / ubuntu / fedora
 # shellcheck source=/dev/null
-. /etc/os-release
-export ID
+. ./01_set_env_variables.sh
 
-# scripts & resources directory
-SOURCE_DIR="$(pwd)"/
-export SOURCE_DIR
-
-# -e to exit on error
-# -u to exit on unset variables
-# optionnally -x to echo commands
-MY_ENV=eux
-export MY_ENV
-set -${MY_ENV}
-
-# info verbose debug trace
-MY_TRACE=true
-export MY_TRACE
-
-# launch apps after install
-LAUNCH_APP=true
-export LAUNCH_APP
+# remove previous log
+rm -f "$INSTALL_LOG"
 
 # speed up Linux Package Manager
-# ./02_speed_up_dnf_n_apt.sh x
+# bash ./02_speed_up_dnf_n_apt.sh || cat  "$INSTALL_LOG"
 
 # install expressvpn package available in "$SOURCE_DIR"
-# ./02_expressvpn.sh x
+# bash ./02_expressvpn.sh || cat  "$INSTALL_LOG"
 
 # modify grub2 to save default, show count down, install theme
-# ./02_grub2.sh x
+# bash ./02_grub2.sh || cat  "$INSTALL_LOG"
 
 # install vim
-./02_vim/02_vim.sh x
+bash ./02_vim/02_vim.sh || cat "$INSTALL_LOG"
 
 # install nvim
-./02_vim/02_nvim.sh x
+bash ./02_vim/02_nvim.sh || cat "$INSTALL_LOG"
 
 # install vscode
-./02_code/02_code.sh x
+bash ./02_code/02_code.sh || cat "$INSTALL_LOG"
 
 # install git, required to install zsh & oh-my-zsh
-./02_git.sh x
+bash ./02_git.sh || cat "$INSTALL_LOG"
 
 # install zsh & oh-my-zsh
-./02_zsh/02_zsh.sh x
+# bash ./02_zsh/02_zsh.sh || cat "$INSTALL_LOG"
 
 # install shellspec
-# ./02_shellspec.sh x bugs if already installed
+bash ./02_shellspec.sh || cat "$INSTALL_LOG"
 
 # mount data partition
-./02_mount_data.sh x
+# bash ./02_mount_data.sh || cat "$INSTALL_LOG"
 
 # update repositories, possibly on data partition
-# ./02_update_repos.sh x   to be fixed which data partition?
+# bash ./02_update_repos.sh x   to be fixed which data partition?
 
 # reset all links
-sudo ./03_reset_all_links.sh x
+sudo ./03_reset_all_links.sh || cat "$INSTALL_LOG"
 
 # install google-chrome
-,google-chrome_update.sh x
+. ,google-chrome_update.sh || cat "$INSTALL_LOG"
 
 # install brave
-./02_brave.sh x
+bash ./02_brave.sh || cat "$INSTALL_LOG"
 
+# install pipx (required to install yt-dlp)
+bash ./02_pipx.sh || cat "$INSTALL_LOG"
+
+# install yt-dlp
+bash ./02_yt-dlp.sh || cat "$INSTALL_LOG"
+
+# install Chinese input
+bash ./02_fcitx.sh || cat "$INSTALL_LOG"
+
+# Fedora only but there might be better WebApp systems than this one
 # install nodeJS & npm, pre-requisites for nativefier -- which transforms websites into web apps
-./02_npm.sh x
+# bash ./02_npm.sh || cat "$INSTALL_LOG"
 
 # install natifvefier, transforms websites into web apps
-./02_nativefier.sh
+# bash ./02_nativefier.sh
 
 # install gimp
-./02_gimp.sh x
+bash ./02_gimp.sh x || cat "$INSTALL_LOG"
 
 # install httrack, copy websites to computer & browse locally
-./02_httrack.sh
+bash ./02_httrack.sh
 
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
+cat "$INSTALL_LOG"

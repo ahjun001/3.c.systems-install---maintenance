@@ -1,31 +1,19 @@
 #!/usr/bin/env bash
-# shellcheck disable=
 
 # 02_shellspec.sh
-# wher
+# Install shellspec for testing
 
-# launch after install
-[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
+# shellcheck source=/dev/null
+. ./01_set_env_variables.sh
 
-# info verbose debug trace
-[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
+program=shellspec
+# Exit if command is already installed
+if command -v "$program" >>"$INSTALL_LOG"; then
+    if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then exit 0; else return 0; fi
+fi
 
-# scripts & resources directory
-[[ -n ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
-
-# -e to exit on error
-# -u to exit on unset variables
-# -x to echo commands for degub purposes
-[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
-set -"$MY_ENV"
-
-# shellSpec
-
-cli_command=shellspec
-if ! command -v "$cli_command"; then
+if ! command -v "$program"; then
     cd /tmp || exit
     if ! wget -O - https://git.io/shellspec | sh; then exit 1; fi
     cd "$SOURCE_DIR" || exit
 fi
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

@@ -1,61 +1,46 @@
 #!/usr/bin/env bash
-# shellcheck disable=
 
-# 00_model.sh
-# repeat description of what the script should do
-# run with arg u  to undo
+# 02_code.sh
+# Install Visual Studio Code, VSCode
 
-# launch after install
-[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
-
-# info verbose debug trace
-[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-
-# -e to exit on error
-# -u to exit on unset variables
-# -x to echo commands for degub purposes
-[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
-set -"$MY_ENV"
-
-# set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ -n ${ID+foo} ]] || . /etc/os-release
+. ./01_set_env_variables.sh
 
-# scripts & resources directory
-# [[ ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
-# LOCAL_RES_DIR="$SOURCE_DIR"'Local resources TBU/'
+# Exit if command is already installed
+if command -v code >>"$INSTALL_LOG"; then
+    if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then exit 0; else return 0; fi
+fi
 
-# if ! command -v code; then
-    case $ID in
-    fedora)
-        # PKG_FMT='rpm'
-        # PKG_MGR='dnf'
-        # MY_TERM_COMMAND='konsole'
-        # MY_FLAGS='-e'
-        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-        sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-        dnf check-update
-        sudo dnf install code
-        ;;
-    linuxmint | ubuntu)
-        # PKG_FMT='deb'
-        # PKG_MGR='apt'
-        # MY_TERM_COMMAND='gnome-terminal'
-        # MY_FLAGS='-x'
-        sudo apt-get install wget gpg
-        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-        sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-        sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-        rm -f packages.microsoft.gpg
-        sudo apt install apt-transport-https
-        sudo apt update
-        sudo apt install code # or code-insiders
-        ;;
-    *)
-        echo "Distribution $ID not recognized, exiting ..."
-        exit 1
-        ;;
-    esac
+case $ID in
+fedora)
+    # PKG_FMT='rpm'
+    # PKG_MGR='dnf'
+    # MY_TERM_COMMAND='konsole'
+    # MY_FLAGS='-e'
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+    dnf check-update
+    sudo dnf install code
+    ;;
+linuxmint | ubuntu)
+    # PKG_FMT='deb'
+    # PKG_MGR='apt'
+    # MY_TERM_COMMAND='gnome-terminal'
+    # MY_FLAGS='-x'
+    sudo apt-get install wget gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
+    sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+    sudo apt install apt-transport-https
+    sudo apt update
+    sudo apt install code # or code-insiders
+    ;;
+*)
+    echo "Distribution $ID not recognized, exiting ..."
+    exit 1
+    ;;
+esac
 
 #     ls "$LOCAL_RES_DIR"code*."$PKG_FMT" &>/dev/null || (
 #         read -r -n 1 -s -p "Set firefox about:preferences Downloads to 'Always ask where to save files'

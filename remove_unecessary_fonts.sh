@@ -133,5 +133,3 @@ if [ -e /usr/share/fonts/truetype/malayalam ]; then sudo rm -rfv /usr/share/font
 # sudo apt install --reinstall fonts-arphic-ukai fonts-arphic-uming fonts-droid-fallback fonts-noto-cjk fonts-wqy-microhei
 
 fc-cache -rf
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
