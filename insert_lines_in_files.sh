@@ -4,22 +4,10 @@
 # 00_model.sh
 # repeat description of what the script should do
 
-# -e to exit on error
-# -u to exit on unset variables
-# -x to echo commands for degub purposes
-[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
-set -"$MY_ENV"
-
-# sed -i '6i\
-# # run with arg u  to undo
-
-# # launch after install
-[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
-
-# info verbose debug trace
-[[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-# \[ -n "${LAUNCH_APP+x}"  \] && LAUNCH_APP=true
-# ' tmp.txt
+set -euo pipefail
+IFS=$'\n\t'
+# shellcheck source=/dev/null
+. ./01_set_env_variables.sh
 
 files=(
     '01_post_install.sh'

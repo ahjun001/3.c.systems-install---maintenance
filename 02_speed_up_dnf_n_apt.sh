@@ -3,6 +3,8 @@
 # 02_speed_up_dnf_n_apt.sh
 # speed up Linux Package Manager
 
+set -euo pipefail
+IFS=$'\n\t'
 # shellcheck source=/dev/null
 . ./01_set_env_variables.sh
 

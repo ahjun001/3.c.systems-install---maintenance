@@ -3,6 +3,8 @@
 
 # post install script to install favorite environment, apps, and settings
 
+set -euo pipefail
+IFS=$'\n\t'
 # shellcheck source=/dev/null
 . ./01_set_env_variables.sh
 
@@ -46,16 +48,19 @@ bash ./02_shellspec.sh || cat "$INSTALL_LOG"
 sudo ./03_reset_all_links.sh || cat "$INSTALL_LOG"
 
 # install google-chrome
-. ,google-chrome_update.sh || cat "$INSTALL_LOG"
+bash ,google-chrome_update.sh || cat "$INSTALL_LOG"
 
 # install brave
 bash ./02_brave.sh || cat "$INSTALL_LOG"
 
-# install pipx (required to install yt-dlp)
+# install pipx (required to install python apps)
 bash ./02_pipx.sh || cat "$INSTALL_LOG"
 
-# install yt-dlp
+# install yt-dlp, requires pipx
 bash ./02_yt-dlp.sh || cat "$INSTALL_LOG"
+
+# install tldr, requires pipx
+bash ./02_tldr.sh || cat "$INSTALL_LOG"
 
 # install Chinese input
 bash ./02_fcitx.sh || cat "$INSTALL_LOG"

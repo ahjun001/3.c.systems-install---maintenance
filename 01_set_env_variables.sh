@@ -10,8 +10,10 @@ export ID
 SOURCE_DIR=$(pwd)
 export SOURCE_DIR
 
+set +e
 # all others, as defined in conf file
 while read -r LINE; do
     declare "$LINE" 2>/dev/null
     export "${LINE%=*}" 2>/dev/null
 done <01_set_env_variables.conf
+set -e
