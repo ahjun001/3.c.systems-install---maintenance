@@ -66,3 +66,6 @@ hash -d wip=$HOME/Desktop/temp   # cd ~wip    easier, to be updated
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Created by `pipx` on 2023-01-28 09:18:26
+export PATH="$PATH:/home/perubu/.local/bin"
