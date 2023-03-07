@@ -11,7 +11,7 @@ IFS=$'\n\t'
 # Exit if program is already installed
 PROGRAM=foo
 # if command -v $PROGRAM >>"$INSTALL_LOG"; then exit 0; fi
-if command -v ls >>"$INSTALL_LOG"; then exit 0; fi
+if command -v $PROGRAM >>"$INSTALL_LOG"; then exit 0; fi
 
 case $ID in
 fedora)

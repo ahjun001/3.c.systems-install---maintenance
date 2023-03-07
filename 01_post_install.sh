@@ -48,7 +48,8 @@ bash ./02_shellspec.sh || cat "$INSTALL_LOG"
 sudo ./03_reset_all_links.sh || cat "$INSTALL_LOG"
 
 # install google-chrome
-bash ,google-chrome_update.sh || cat "$INSTALL_LOG"
+# shellcheck source=/dev/null
+. ,google-chrome_update.sh || cat "$INSTALL_LOG"
 
 # install brave
 bash ./02_brave.sh || cat "$INSTALL_LOG"
@@ -78,4 +79,7 @@ bash ./02_gimp.sh x || cat "$INSTALL_LOG"
 # install httrack, copy websites to computer & browse locally
 bash ./02_httrack.sh
 
+# install printer driver
+bash ./02_install_printer_driver.sh
+ 
 cat "$INSTALL_LOG"

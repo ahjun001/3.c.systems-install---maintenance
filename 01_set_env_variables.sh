@@ -4,6 +4,7 @@
 # shellcheck source=/dev/null
 . /etc/os-release >/dev/null
 export ID
+export VERSION_CODENAME
 
 # scripts & resources root directory, taken as reference when calling sub-scripts
 # careful if script not in root (as for vim, nvim, code)
