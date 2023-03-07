@@ -15,7 +15,7 @@
 # -e to exit on error
 # -u to exit on unset variables
 # -x to echo commands for degub purposes
-[[ -n ${MY_ENV+foo} ]] || MY_ENV=eux
+[[ -n ${MY_ENV+foo} ]] || MY_ENV=eu
 set -"$MY_ENV"
 
 # util function to force to recreate possibly existing link and check that it is not broken
@@ -74,5 +74,3 @@ make_a_link
 my_orig='/home/perubu/.local/lib/shellspec/shellspec'
 my_link=/usr/local/sbin/"$(basename "$my_orig")"
 make_a_link
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
