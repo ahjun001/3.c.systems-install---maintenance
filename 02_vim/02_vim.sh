@@ -35,8 +35,8 @@ if ! command -v gvim; then
         sudo dnf install vim-default-editor --allowerasing
         ;;
     linuxmint | ubuntu)
-        sudo apt install vim.gtk3
-        update-alternatives --set editor /usr/bin/vim.gtk3
+        sudo apt install vim
+        # update-alternatives --set editor /usr/bin/vim
         ;;
     *)
         echo "Distribution $ID not recognized, exiting ..."
@@ -52,6 +52,6 @@ done
 
 ln -fs "$SOURCE_DIR"/02_vim/vimrc ~/.vim/vimrc
 
-if ! command -v gvim ; then exit 1; fi
+if ! command -v vim ; then exit 1; fi
 
 echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
