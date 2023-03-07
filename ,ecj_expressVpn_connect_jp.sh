@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -x
-expressvpn disconnect
+expressvpn connect jp
 set +x
