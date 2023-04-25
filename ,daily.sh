@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
 clear
-set -eux
-expressvpn status
-cat <<EOF
+
+ping -q -c 1 -w 1 google.com || echo Ping google.com unsuccessful
+cat <<.
 
 
-EOF
+.
 ,width_reduce.sh &
-cat <<EOF
+cat <<.
 
 
-EOF
+.
 
 # set environment: ID
 # shellcheck source=/dev/null
@@ -22,10 +23,10 @@ fedora) sudo dnf -y update ;;
 linuxmint | ubuntu) sudo apt update -y && sudo apt upgrade -y ;;
 *) echo "Should not happen" && exit 1 ;;
 esac
-cat <<EOF
+cat <<.
 
 
-EOF
+.
 case $ID in
 linuxmint | ubuntu) sudo yt-dlp -U ;;
 fedora) ;;
