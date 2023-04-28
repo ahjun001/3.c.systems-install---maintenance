@@ -6,11 +6,10 @@
 # run with arg u  to undo
 
 # launch after install
-[[ -n ${LAUNCH_APP+foo} ]]  || LAUNCH_APP=true
+[[ -n ${LAUNCH_APP+foo} ]] || LAUNCH_APP=true
 
 # info verbose debug trace
 [[ ${MY_TRACE+foo} ]] || MY_TRACE=true
-
 
 # -e to exit on error
 # -u to exit on unset variables
@@ -20,10 +19,10 @@ set -"$MY_ENV"
 
 # set environment: ID, SOURCE_DIR
 # shellcheck source=/dev/null
-[[ -n ${ID+foo} ]]  || . /etc/os-release
+[[ -n ${ID+foo} ]] || . /etc/os-release
 
 # scripts & resources directory
-[[  ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
+[[ ${SOURCE_DIR+foo} ]] || SOURCE_DIR="$(pwd)"/
 
 # install neovim, run nvim
 
@@ -47,5 +46,3 @@ if ! command -v nvim; then
 fi
 
 if ! command -v nvim; then exit 1; fi
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"

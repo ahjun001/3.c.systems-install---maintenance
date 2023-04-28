@@ -32,5 +32,3 @@ linuxmint | ubuntu) sudo yt-dlp -U ;;
 fedora) ;;
 *) echo "Should not happen" && exit 1 ;;
 esac
-
-echo -e "$(basename -- "$0") exited with code=\033[0;32m$?\033[0;31m"
