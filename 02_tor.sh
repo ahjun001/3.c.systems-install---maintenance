@@ -19,7 +19,12 @@ fedora)
     sudo dnf install "$packageNeeded"
     ;;
 linuxmint | ubuntu)
-    echo download tar and install in opt after $ chown -R perubu:perubu
+    cat <<.
+    Download tar from https://www.torproject.org/
+    Decompress tor-browser in /tmp, then move to /opt
+    $ cd /opt/tor-browser
+    $ ./start-tor-browser.desktop --register-app
+.
     # sudo apt install torbrowser-launcher
 
 #     sudo apt install apt-transport-tor

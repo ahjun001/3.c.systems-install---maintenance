@@ -7,7 +7,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 # shellcheck source=/dev/null
-. ./01_set_env_variables.sh
+. /usr/local/sbin/01_set_env_variables.sh
 
 if [[ "$0" == "${BASH_SOURCE[0]}" ]] ||
     ! command -v google-chrome >>"$INSTALL_LOG"; then

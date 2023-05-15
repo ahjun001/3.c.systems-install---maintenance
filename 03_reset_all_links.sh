@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# 03_reset_all_links.sh
-# set links so that apps are seen in $PATH or ,shorcuts; also link repos from partition with data partition
+: "
+  03_reset_all_links.sh
+  set links so that apps are seen in $PATH or ,shorcuts;
+  all links are hard as all refer to files located on same partition
+  "
 
 set -euo pipefail
 IFS=$'\n\t'
@@ -10,7 +13,7 @@ IFS=$'\n\t'
 
 # util function to force to recreate possibly existing link and check that it is not broken
 make_a_link() {
-   if ! ln -fs "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+   if ! ln -f "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
       exit 1
    fi
 }
@@ -36,11 +39,19 @@ my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/02_zsh/.zshrc'
 my_link=/home/perubu/"$(basename "$my_orig")"
 make_a_link
 
+# link to Github 01_post_install.sh so that google chrome could be updated from any directory
+# and keep the consistency of reporting at install / re-install time
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/01_set_env_variables.sh'
+my_link=/usr/local/sbin/
+make_a_link
+my_orig='/home/perubu/Documents/Github/3.c-install-n-utils/01_set_env_variables.conf'
+my_link=/usr/local/sbin/
+make_a_link
+
 # link to all Github bash scripts whose filename starts with ,
 if ! find /home/perubu/Documents/Github/3.c-install-n-utils/ \
    -type f -name ',*.sh' \
-   -exec sudo ln \
-   -fs {} /usr/local/sbin/ \;; then
+   -exec sudo ln -f {} /usr/local/sbin/ \;; then
    exit 1
 fi
 # where the literal {} gets substituted by the filename and
@@ -51,7 +62,7 @@ if ! find /home/perubu/Documents/Github/3.c-install-n-utils/02_code/User/snippet
    -type f \
    -name '*.json' \
    -exec sudo ln \
-   -fs {} /home/perubu/.config/Code/User/snippets/ \;; then
+   -f {} /home/perubu/.config/Code/User/snippets/ \;; then
    exit 1
 fi
 
