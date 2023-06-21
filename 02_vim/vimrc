@@ -236,10 +236,11 @@ if !exists('g:vscode')
         set ar
 
         " get the mouse connected --pjp
-        if has('nvim')
-        else
-            set mouse=a
-        endif
+        " if has('nvim')
+        " else
+        "     set mouse=a
+        " endif
+        set mouse=a
 
         " Making chars visible and look like >--- --pjp
         set list
