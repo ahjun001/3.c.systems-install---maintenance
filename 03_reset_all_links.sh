@@ -2,18 +2,17 @@
 
 : "
   03_reset_all_links.sh
-  set links so that apps are seen in $PATH or ,shorcuts;
-  all links are hard as all refer to files located on same partition
+  set links so that apps are seen in $PATH or as ,shorcuts that start with a comma ',';
   "
 
 set -euo pipefail
-IFS=$'\n\t'
+
 # shellcheck source=/dev/null
 . ./01_set_env_variables.sh
 
 # util function to force to recreate possibly existing link and check that it is not broken
 make_a_link() {
-   if ! ln -f "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
+   if ! ln -sf "$my_orig" "$my_link" || [ ! -e "${my_link}" ]; then
       exit 1
    fi
 }
@@ -51,7 +50,7 @@ make_a_link
 # link to all Github bash scripts whose filename starts with ,
 if ! find /home/perubu/Documents/Github/3.c-install-n-utils/ \
    -type f -name ',*.sh' \
-   -exec sudo ln -f {} /usr/local/sbin/ \;; then
+   -exec sudo ln -sf {} /usr/local/sbin/ \;; then
    exit 1
 fi
 # where the literal {} gets substituted by the filename and
@@ -62,7 +61,7 @@ if ! find /home/perubu/Documents/Github/3.c-install-n-utils/02_code/User/snippet
    -type f \
    -name '*.json' \
    -exec sudo ln \
-   -f {} /home/perubu/.config/Code/User/snippets/ \;; then
+   -sf {} /home/perubu/.config/Code/User/snippets/ \;; then
    exit 1
 fi
 

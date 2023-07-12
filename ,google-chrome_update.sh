@@ -5,10 +5,12 @@
 # if sourced and if not installed, then will installed
 
 set -euo pipefail
-IFS=$'\n\t'
+
 # shellcheck source=/dev/null
 . /usr/local/sbin/01_set_env_variables.sh
 
+# forcing to install if launched from CLI
+# exiting if google-chrome is already installed
 if [[ "$0" == "${BASH_SOURCE[0]}" ]] ||
     ! command -v google-chrome >>"$INSTALL_LOG"; then
 
