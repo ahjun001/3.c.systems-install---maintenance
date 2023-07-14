@@ -67,6 +67,24 @@ endif
 set foldexpr=getline(v:lnum-2)=~'^\\s*$'&&getline(v:lnum-1)=~'^\\s*$'&&getline(v:lnum)=~'\\S'?'>1':1  
 
 
+" Get nvim to share the clipboard with other applications and automatically select the correct clipboard for each operation
+if has ('nvim')
+      set clipboard+=unnamedplus
+      let g:clipboard = {
+          \ 'name': 'xclip',
+          \ 'copy': {
+              \ '+': 'xclip -selection clipboard',
+              \ '*': 'xclip -selection primary',
+              \ },
+          \ 'paste': {
+              \ '+': 'xclip -selection clipboard -o',
+              \ '*': 'xclip -selection primary -o',
+              \ },
+          \ 'cache_enabled': 1,
+          \ }
+endif
+
+
 " Set color sheme --pjp
 if $TERM == 'linux'
         colorscheme darkblue
@@ -125,7 +143,7 @@ if !exists('g:vscode')
 
 
         " Turn off physical line wrapping for .txt files --pjp
-        set textwidth=0
+        " set textwidth=0
         " will be overwriten by file types plugins
         autocmd FileType text setlocal textwidth=0 " works better
 
