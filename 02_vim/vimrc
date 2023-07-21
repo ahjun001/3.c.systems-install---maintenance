@@ -118,8 +118,11 @@ endif
 " make a command to Wipe oldfiles -- pjp
 command! WipeOl set vi+='0 | wv!
 
+echo "\x07"
 
-if !exists('g:vscode')
+if exists('g:vscode')
+        nnoremap <buffer> gf call VSCodeCall('seito-openfile.openFileFromText')<CR>
+else
         " number lines --pjp
         set nu rnu
 
@@ -164,7 +167,7 @@ if !exists('g:vscode')
 
 
         " error bells --pjp
-        set errorbells  " Disable beep on errors.
+        " set errorbells  " Disable beep on errors.
         set visualbell  " Flash the screen instead of beeping on errors.
 
 
