@@ -19,7 +19,8 @@ fedora)
     exit 1
     ;;
 linuxmint | ubuntu)
-    sudo apt install ~/Downloads/nvim-linux64.deb
+    wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -O /tmp/
+    # sudo apt install ~/Downloads/nvim-linux64.deb
     ;;
 *)
     echo "Distribution $ID not recognized, exiting ..."
