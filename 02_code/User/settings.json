@@ -1,0 +1,296 @@
+{
+  "editor.wordWrapColumn": 80,
+  "editor.suggest.showUsers": true,
+  "breadcrumbs.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderControlCharacters": true,
+  "editor.scrollBeyondLastLine": false,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": false,
+  "files.autoSave": "afterDelay",
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.defaultCloneDirectory": "~/Documents/GitHub/",
+  "python.envFile": "~/.venv3.9.5/bin/python",
+  "python.languageServer": "Pylance",
+  "python.linting.flake8Args": [
+    "--max-line-length=120"
+  ],
+  "isort.path": [
+    "/home/perubu/.local/bin/isort",
+    "/usr/local/bin/isort"
+  ],
+  "python.testing.cwd": "",
+  "python.venvPath": "~/",
+  "sourcery.token": "user__Fp_nK66mYZn4H_1mAq7g3NJMooJP92_wxqvHvuLKwEZOehAslU5sx11R8s",
+  "vscode-neovim.highlightGroups.highlights": {
+    "Conceal": "vim",
+    "Directory": "vim",
+    "IncSearch": {
+      "backgroundColor": "theme.editor.findMatchBackground",
+      "borderColor": "theme.editor.findMatchBorder"
+    },
+    "Search": {
+      "backgroundColor": "theme.editor.findMatchHighlightBackground",
+      "borderColor": "theme.editor.findMatchHighlightBorder"
+    },
+    "Substitute": "vim",
+    "Visual": {
+      "backgroundColor": "theme.editor.selectionBackground"
+    }
+  },
+  "vscode-neovim.highlightGroups.ignoreHighlights": [
+    "SpecialKey",
+    "EndOfBuffer",
+    "TermCursor",
+    "TermCursorNC",
+    "NonText",
+    "ErrorMsg",
+    "MoreMsg",
+    "ModeMsg",
+    "LineNr",
+    "CursorLineNr",
+    "Question",
+    "StatusLine",
+    "StatusLineNC",
+    "VertSplit",
+    "Title",
+    "VisualNC",
+    "WarningMsg",
+    "WildMenu",
+    "^Diff",
+    "Sign",
+    "SignColumn",
+    "^Spell",
+    "^Pmenu",
+    "^Tab",
+    "^Cursor",
+    "ColorColumn",
+    "QuickFixLine",
+    "Whitespace",
+    "NormalNC",
+    "Normal",
+    "NormalFloat",
+    "MsgSeparator",
+    "MsgArea",
+    "^RedrawDebug",
+    "Cursor",
+    "lCursor",
+    "MatchParen",
+    "^Nvim",
+    "Operator",
+    "Delimiter",
+    "Identifier",
+    "SpecialChar",
+    "Number",
+    "Type",
+    "String",
+    "Error",
+    "Comment",
+    "Constant",
+    "Special",
+    "Statement",
+    "PreProc",
+    "Underlined",
+    "Ignore",
+    "Todo",
+    "Character",
+    "Boolean",
+    "Float",
+    "Function",
+    "Conditional",
+    "Repeat",
+    "Label",
+    "Keyword",
+    "Exception",
+    "Include",
+    "Define",
+    "Macro",
+    "PreCondit",
+    "StorageClass",
+    "Structure",
+    "Typedef",
+    "Tag",
+    "SpecialComment",
+    "Debug",
+    "Folded",
+    "FoldColumn"
+  ],
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.win32": "C:\\tools\\neovim\\Neovim\\bin\\nvim.exe",
+  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\perubu\\Documents\\Github\\cheat-sheet_vim\\vimrc",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.editor.decorations.badges": true,
+  "workbench.editor.decorations.colors": true,
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
+  "workbench.editor.enablePreviewFromQuickOpen": true,
+  "workbench.settings.openDefaultKeybindings": true,
+  "workbench.settings.openDefaultSettings": true,
+  "workbench.startupEditor": "none",
+  "[plaintext]": {
+    "editor.defaultFormatter": "lkrms.inifmt",
+    "editor.wordWrap": "on",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "debug.inlineValues": "auto",
+  "editor.formatOnType": true,
+  "shellformat.path": "/home/perubu/.local/lib/altshfmt/altshfmt",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "python.defaultInterpreterPath": "~/.venv3.9.5/bin/python3",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.venvFolders": [
+    "~/.venv3.9.5/"
+  ],
+  "editor.tokenColorCustomizations": {
+    "comments": "#229999"
+  },
+  "markdown.preview.breaks": true,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "python.formatting.blackArgs": [
+    "--line-length=79"
+  ],
+  "python.formatting.autopep8Args": [
+    "--max-line-length=79",
+    "--experimental"
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "explorer.confirmDragAndDrop": false,
+  "task.autoDetect": "off",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "terminal.integrated.env.linux": {},
+  "fileScriptRunner.script": [],
+  "code-runner.clearPreviousOutput": true,
+  "python.linting.pycodestyleArgs": [
+    "--max-line-length=120"
+  ],
+  "code-runner.executorMap": {
+    "javascript": "node",
+    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "php": "php",
+    "python": "${workspaceFolder}/.env/bin/python3",
+    "perl": "perl",
+    "perl6": "perl6",
+    "ruby": "ruby",
+    "go": "go run",
+    "lua": "lua",
+    "groovy": "groovy",
+    "powershell": "powershell -ExecutionPolicy ByPass -File",
+    "bat": "cmd /c",
+    "shellscript": "bash",
+    "fsharp": "fsi",
+    "csharp": "scriptcs",
+    "vbscript": "cscript //Nologo",
+    "typescript": "ts-node",
+    "coffeescript": "coffee",
+    "scala": "scala",
+    "swift": "swift",
+    "julia": "julia",
+    "crystal": "crystal",
+    "ocaml": "ocaml",
+    "r": "Rscript",
+    "applescript": "osascript",
+    "clojure": "lein exec",
+    "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+    "racket": "racket",
+    "scheme": "csi -script",
+    "ahk": "autohotkey",
+    "autoit": "autoit3",
+    "dart": "dart",
+    "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+    "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+    "haskell": "runhaskell",
+    "nim": "nim compile --verbosity:0 --hints:off --run",
+    "lisp": "sbcl --script",
+    "kit": "kitc --run",
+    "v": "v run",
+    "sass": "sass --style expanded",
+    "scss": "scss --style expanded",
+    "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+    "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+  },
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "explorer.sortOrder": "type",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggest.showSnippets": false,
+  "shell-syntax.defaultShell": "zsh",
+  "code-runner.runInTerminal": true,
+  "tidyHtml.enableDynamicTags": false,
+  "tidyHtml.formatOnSave": false,
+  "python.linting.lintOnSave": false,
+  "python.linting.enabled": false,
+  "githubIssues.queries": [
+    {
+      "label": "My Issues",
+      "query": "default"
+    },
+    {
+      "label": "Created Issues",
+      "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+    },
+    {
+      "label": "Recent Issues",
+      "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+    }
+  ],
+  "shellformat.useEditorConfig": true,
+  "vscode-neovim.neovimWidth": 125,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[JSON]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "asciidoc.preview.attributes": {
+    "fontSize": "24px",
+    "fontFamily": "Arial, sans-serif",
+  },
+  "[asciidoc]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+  "files.associations": {
+    "*.adoc": "asciidoc"
+  },
+  "git.openRepositoryInParentFolders": "always",
+  "codeium.enableSearch": true,
+  "workbench.colorTheme": "Solarized Light",
+  "window.menuBarVisibility": "toggle",
+  "workbench.activityBar.visible": false,
+  // "asciidoc.preview.fontFamily": "Arial, sans-serif",
+  // "asciidoc.preview.fontSize": "44pt",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "vscode-neovim.logLevel": "debug",
+}
