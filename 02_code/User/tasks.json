@@ -27,5 +27,14 @@
             "problemMatcher": "$msCompile",
             "group": "build"
         },
+        {
+            "label": "Run Bash Script",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${file}"
+            ],
+            "problemMatcher": []
+        }
     ]
 }
